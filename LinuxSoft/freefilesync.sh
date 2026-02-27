@@ -1,0 +1,95 @@
+#!/bin/bash
+sudo apt install -y freefilesync
+cat > /usr/share/applications/FreeFileSync.desktop << EOF
+[Desktop Entry]
+Type=Application
+Name=FreeFileSync
+Exec=FreeFileSync %F
+Icon=FreeFileSync
+Terminal=false
+Categories=Utility;FileTools;Archiving;
+StartupNotify=true
+MimeType=application/x-freefilesync-gui;application/x-freefilesync-batch;
+Comment=Folder Comparison and Synchronization
+Comment[ar]=مقارنة ومزامنة المجلدات
+Comment[bg]=Сравняване и синхронизация на папки
+Comment[cs]=porovnání a synchronizace složek
+Comment[da]=Mappeanalyse og synkronisering
+Comment[de]=Ordnervergleich und Synchronisation
+Comment[el]=Σύγκριση Φακέλων και Συγχρονισμός
+Comment[en_GB]=Folder Comparison and Synchronisation
+Comment[es]=Comparación y sincronización de carpetas
+Comment[fi]=Hakemistojen vertailu ja synkronointi
+Comment[fr]=Comparaison de dossiers et Synchronisation
+Comment[he]=סנכרון קבצים ותיקיות
+Comment[hi]=निर्देशिका तुलना और सिंक्रनाइज़ेशन
+Comment[hr]=Usporedba i sinkronizacija mapa
+Comment[hu]=Mappa összehasonlítás és szinkronizálás
+Comment[it]=Comparazione delle Cartelle e Sincronizzazione
+Comment[ja]=フォルダの比較と同期
+Comment[ko]=폴더 비교 및 동기화
+Comment[lt]=Aplankų Palyginimas ir Suvienodinimas
+Comment[nl]=Map vergelijken en synchroniseren
+Comment[no]=Mappe-sammenligning og synkronisering
+Comment[pl]=Porównywanie i Synchronizacja folderów
+Comment[pt]=Comparação e Sincronização de Pastas
+Comment[pt_BR]=Comparação e Sincronização de Pastas
+Comment[ro]=Comparație și sincronizare a directoarelor
+Comment[ru]=Сравнение и синхронизация
+Comment[sk]=Porovnanie a synchronizácia priečinkov
+Comment[sl]=Primerjava in sinhronizacija mape
+Comment[sv]=Mappjämförelse och synkronisering
+Comment[tr]=Klasör karşılaştırma ve eşitleme
+Comment[vi]=So sánh và đồng bộ hóa thư mục
+Comment[zh]=文件夹比较与同步
+Comment[zh_TW]=資料夾比對和同步
+Keywords=Backup Copy
+Path=/usr/share/freefilesync
+StartupWMClass=FreeFileSync
+EOF
+cat > /usr/share/applications/RealTimeSync.desktop << EOF
+[Desktop Entry]
+Type=Application
+Name=RealTimeSync
+Exec=RealTimeSync %f
+Icon=RealTimeSync
+Terminal=false
+Categories=Utility;FileTools;Archiving;
+StartupNotify=true
+MimeType=application/x-freefilesync-real;
+Comment=Automated Synchronization
+Comment[ar]=المزامنة التلقائية
+Comment[bg]=Автоматична синхронизация
+Comment[cs]=Automatická synchronizace
+Comment[da]=Automatisk synkronisering
+Comment[de]=Automatisierte Synchronisation
+Comment[el]=Αυτοματοποιημένος Συγχρονισμός
+Comment[en_GB]=Automated Synchronisation
+Comment[es]=Sincronización Automática
+Comment[fi]=Automaattinen synkronointi
+Comment[fr]=Synchronisation Automatique
+Comment[he]=סנכרון אוטומטי
+Comment[hi]=स्वचालित सिंक्रनाइज़ेशन
+Comment[hr]=Automatska Sinkronizacija
+Comment[hu]=Automatizált szinkronizálás
+Comment[it]=Sincronizzazione automatizzata
+Comment[ja]=自動同期
+Comment[ko]=자동 동기화
+Comment[lt]=Automatinis Suvienodinimas
+Comment[nl]=Automatische synchronisatie
+Comment[no]=Automatisk synkronisering
+Comment[pl]=Automatyczna synchronizacja
+Comment[pt]=Sincronização Automática
+Comment[pt_BR]=Sincronização Automatizada
+Comment[ro]=Sincronizare Automată
+Comment[ru]=Автоматическая синхронизация
+Comment[sk]=Automatická synchronizácia
+Comment[sl]=Samodejna sinhronizacija
+Comment[sv]=Automatiserad synkronisering
+Comment[tr]=Otomatik eşitleme
+Comment[vi]=Đồng bộ tự động
+Comment[zh]=自动同步
+Comment[zh_TW]=自動化同步
+Keywords=Backup Copy
+Path=/usr/share/freefilesync
+EOF

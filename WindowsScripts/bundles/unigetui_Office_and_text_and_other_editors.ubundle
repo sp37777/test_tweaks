@@ -1,0 +1,63 @@
+{
+  "export_version": 3,
+  "packages": [
+    {
+      "Id": "9P9MRBXJJG0M",
+      "Name": "Collabora Office Desktop",
+      "Version": "Unknown",
+      "Source": "msstore",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "9WZDNCRFHVN5",
+      "Name": "Windows Calculator",
+      "Version": "Unknown",
+      "Source": "msstore",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Apache.OpenOffice",
+      "Name": "OpenOffice",
+      "Version": "4.116.9816",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "MHNexus.HxD",
+      "Name": "HxD Hex Editor",
+      "Version": "2.5",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Notepad\u002B\u002B.Notepad\u002B\u002B",
+      "Name": "Notepad\u002B\u002B",
+      "Version": "8.9",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "SumatraPDF.SumatraPDF",
+      "Name": "SumatraPDF",
+      "Version": "3.5.2",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "TheDocumentFoundation.LibreOffice",
+      "Name": "LibreOffice",
+      "Version": "25.8.4.2",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "VSCodium.VSCodium",
+      "Name": "VSCodium",
+      "Version": "1.107.18627",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    }
+  ],
+  "incompatible_packages_info": "Incompatible packages cannot be installed from UniGetUI, either because they came from a local source (for example Local PC) or because the package manager was unavailable. Nevertheless, they have been listed here for logging purposes.",
+  "incompatible_packages": []
+}

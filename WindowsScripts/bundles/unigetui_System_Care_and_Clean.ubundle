@@ -1,0 +1,61 @@
+{
+  "export_version": 3,
+  "packages": [
+    {
+      "Id": "BleachBit.BleachBit",
+      "Name": "BleachBit",
+      "Version": "5.0.2.3065",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "DupeGuru.DupeGuru",
+      "Name": "dupeGuru",
+      "Version": "4.3.1",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "GeekUninstaller.GeekUninstaller",
+      "Name": "Geek Uninstaller",
+      "Version": "1.5.3.170",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Klocman.BulkCrapUninstaller",
+      "Name": "Bulk Crap Uninstaller",
+      "Version": "5.9",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "RevoUninstaller.RevoUninstaller",
+      "Name": "Revo Uninstaller",
+      "Version": "2.6.5",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "qarmin.czkawka.gui",
+      "Name": "Czkawka",
+      "Version": "10.0.0",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "systemninja",
+      "Name": "Systemninja",
+      "Version": "3.1.6",
+      "Source": "community",
+      "ManagerName": "Chocolatey"
+    },
+    {
+      "Id": "WiseCleaner.WiseDuplicateFinder",
+      "Name": "Wise Duplicate Finder",
+      "Version": "2.1.8",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    }
+  ]
+}

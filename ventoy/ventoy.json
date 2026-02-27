@@ -1,0 +1,43 @@
+{
+    "control":[
+        { "VTOY_DEFAULT_MENU_MODE": "1" },
+        { "VTOY_DEFAULT_SEARCH_ROOT": "/Images" },
+		{ "VTOY_LINUX_REMOUNT": "1" }
+    ],
+    "theme_legacy":{
+        "display_mode": "CLI"
+    },
+    "theme_uefi":{
+        "display_mode": "GUI"
+    },
+    "auto_install":[
+        {
+            "parent": "/Images/Windows/7",
+            "template":[
+                "/ventoy/unattend/unattend_7.xml"
+            ]
+        },
+        {
+            "parent": "/Images/Windows/81",
+            "template":[
+                "/ventoy/unattend/unattend_81.xml"
+            ]
+        },
+        {
+            "parent": "/Images/Windows/10_11",
+            "template":[
+                "/ventoy/unattend/unattend_10_schneegans_enterprise.xml",
+                "/ventoy/unattend/unattend_10_schneegans",
+				"/ventoy/unattend/autounattend.xml"
+            ]
+        },
+        {
+            "parent": "/Images/Windows/ltsc",
+            "template":[
+                "/ventoy/unattend/unattend_10_schneegans_LTSC_IoT.xml",
+                "/ventoy/unattend/unattend_10_schneegans.xml",
+				"/ventoy/unattend/autounattend.xml"
+            ]
+        }
+    ]
+}

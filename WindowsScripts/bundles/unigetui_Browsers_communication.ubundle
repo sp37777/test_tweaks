@@ -1,0 +1,82 @@
+{
+  "export_version": 3,
+  "packages": [
+    {
+      "Id": "Google.Chrome",
+      "Name": "Google Chrome",
+      "Version": "143.0.7499.193",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "LibreWolf.LibreWolf",
+      "Name": "LibreWolf",
+      "Version": "146.0.1-1",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Mozilla.Firefox",
+      "Name": "Mozilla Firefox (en-US)",
+      "Version": "146.0.1",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Mozilla.Firefox.uk",
+      "Name": "Mozilla Firefox (uk)",
+      "Version": "146.0.1",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Waterfox.Waterfox",
+      "Name": "Waterfox",
+      "Version": "6.6.7",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Hibbiki.Chromium",
+      "Name": "Chromium",
+      "Version": "144.0.7559.133",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "eloston.ungoogled-chromium",
+      "Name": "ungoogled-chromium",
+      "Version": "144.0.7559.132",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "9NKSQGP7F2NH",
+      "Name": "WhatsApp",
+      "Version": "Unknown",
+      "Source": "msstore",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Proton.ProtonMail",
+      "Name": "Proton Mail",
+      "Version": "1.11.0",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Rakuten.Viber",
+      "Name": "Viber",
+      "Version": "26.8.4.0",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Zoom.Zoom",
+      "Name": "Zoom Workplace",
+      "Version": "6.7.26346",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "export_version": 3,
+  "packages": [
+    {
+      "Id": "DelugeTeam.Deluge",
+      "Name": "Deluge BitTorrent Client",
+      "Version": "2.2.0",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Stacher.Stacher",
+      "Name": "Stacher is a modern front-end for the yt-dlp command line tool",
+      "Version": "7.1.4",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Transmission.Transmission",
+      "Name": "Transmission",
+      "Version": "4.0.6",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "qBittorrent.qBittorrent",
+      "Name": "qBittorrent",
+      "Version": "5.1.4",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "dsymbol.yt-dlp-gui",
+      "Name": "yt-dlp-gui",
+      "Version": "2025.09.30",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "yt-dlp.yt-dlp",
+      "Name": "yt-dlp",
+      "Version": "2025.12.08",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "yt-dlp.FFmpeg",
+      "Name": "FFmpeg for yt-dlp",
+      "Version": "N-121938-g2456a39581-20251130",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    }
+  ]
+}

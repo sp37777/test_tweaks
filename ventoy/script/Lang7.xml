@@ -1,0 +1,9 @@
+<gs:GlobalizationServices xmlns:gs="urn:longhornGlobals">
+   <gs:UserList>
+       <gs:User UserID="Current"/>
+   </gs:UserList>
+   <gs:InputPreferences>
+       <gs:InputLanguageID Action="add" ID="0409:00000409" Default="true"/>
+       <gs:InputLanguageID Action="add" ID="0422:00000422"/>
+   </gs:InputPreferences>
+</gs:GlobalizationServices>

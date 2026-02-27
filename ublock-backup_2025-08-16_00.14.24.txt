@@ -1,0 +1,58 @@
+{
+  "timeStamp": 1755292464018,
+  "version": "1.65.0",
+  "userSettings": {
+    "externalLists": "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt\nhttps://www.i-dont-care-about-cookies.eu/abp/",
+    "importedLists": [
+      "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt",
+      "https://www.i-dont-care-about-cookies.eu/abp/"
+    ],
+    "popupPanelSections": 63
+  },
+  "selectedFilterLists": [
+    "user-filters",
+    "ublock-filters",
+    "ublock-badware",
+    "ublock-privacy",
+    "ublock-quick-fixes",
+    "ublock-unbreak",
+    "easylist",
+    "easyprivacy",
+    "adguard-spyware-url",
+    "block-lan",
+    "urlhaus-1",
+    "curben-phishing",
+    "plowe-0",
+    "dpollock-0",
+    "fanboy-cookiemonster",
+    "ublock-cookies-easylist",
+    "fanboy-thirdparty_social",
+    "easylist-chat",
+    "easylist-newsletters",
+    "easylist-notifications",
+    "easylist-annoyances",
+    "ublock-annoyances",
+    "RUS-0",
+    "RUS-1",
+    "UKR-0",
+    "https://www.i-dont-care-about-cookies.eu/abp/",
+    "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt"
+  ],
+  "hiddenSettings": {},
+  "whitelist": [
+    "about-scheme",
+    "brain.com.ua",
+    "chrome-extension-scheme",
+    "chrome-scheme",
+    "edge-scheme",
+    "moz-extension-scheme",
+    "next.privat24.ua",
+    "opera-scheme",
+    "vivaldi-scheme",
+    "wyciwyg-scheme"
+  ],
+  "dynamicFilteringString": "behind-the-scene * * noop\nbehind-the-scene * inline-script noop\nbehind-the-scene * 1p-script noop\nbehind-the-scene * 3p-script noop\nbehind-the-scene * 3p-frame noop\nbehind-the-scene * image noop\nbehind-the-scene * 3p noop",
+  "urlFilteringString": "",
+  "hostnameSwitchesString": "no-large-media: behind-the-scene false\nno-csp-reports: * true",
+  "userFilters": "youtube.com##.yt-ui-ellipsis\nyoutube.com##.yt-ui-ellipsis-2\nyoutube.com##.ytp-ce-covering-overlay\nyoutube.com##.ytp-ce-element-shadow\nyoutube.com##.ytp-ce-covering-image\nyoutube.com##.ytp-ce-expanding-image\nyoutube.com##.ytp-ce-element.ytp-ce-video.ytp-ce-element-show\nyoutube.com##.ytp-ce-element.ytp-ce-playlist.ytp-ce-element-show\nyoutube.com##.ytp-ce-element.ytp-ce-channel.ytp-ce-channel-this\nyoutube.com##.ytp-ce-element.ytp-ce-website.ytp-ce-element-show\nyoutube.com##.ytp-ce-video-title\nyoutube.com##.ytp-ce-video-title yt-ui-ellipsis yt-ui-ellipsis-2\nyoutube.com##.ytp-ce-element.ytp-ce-channel.ytp-ce-channel-this.ytp-ce-element-show.ytp-ce-bottom-right-quad.ytp-ce-size-640\nyoutube.com##.ytp-pause-overlay-container\nyoutube.com##.ytp-ce-channel\n\n! 2023-06-13 https://master-plus.com.ua\nmaster-plus.com.ua##.cookie-rb876-wrapper\n\n! Block Rozetka product-like ads\nrozetka.com.ua##[data-testid=\"category_goods\"] .tile:has(span:has-text(Реклама))\nrozetka.com.ua##[data-testid=\"category_goods\"] > div:has(.tile:has(span:has-text(Реклама)))\nrozetka.com.ua##li.catalog-grid__cell:has(.goods-tile__content rz-advertising-label)\n\nepicentrk.ua##[itemprop=\"mainEntity\"] ul > li:has(div:has-text(Реклама))\n\nyoutube.com#@#.ytp-paid-content-overlay\n\n! 2 серп. 2025 р. https://www.youtube.com\nwww.youtube.com##ytd-rich-section-renderer.ytd-rich-grid-renderer.style-scope:nth-of-type(2)"
+}
