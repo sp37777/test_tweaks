@@ -1,14 +1,13 @@
 # --- CONFIGURATION ---
-$BaseXmlPath = "C:\ventoy\unattend\autounattend_base.xml" # Your Schneegans file
-$OutputDir   = "C:\ventoy\unattend\generated"
+$BaseXmlPath = "$PSScriptRoot\autounattend_base.xml" # Your Schneegans file
+$OutputDir   = $PSScriptRoot
 if (!(Test-Path $OutputDir)) { New-Item -ItemType Directory -Path $OutputDir }
 
 # List of Editions and their GVLK (KMS) Keys
 $Editions = @(
-    @{ Name="IoT_LTSC_2024";   Key="CGK42-GYN6Y-VD22B-BX98W-J8JXD"; Desc="IoT Enterprise LTSC" },
-    @{ Name="Enterprise_LTSC"; Key="M7XTQ-FN8P6-TTKYV-9D4CC-J462D"; Desc="Standard Enterprise LTSC" },
-    @{ Name="IoT_GAC_NonLTSC"; Key="KBN8V-HFGQ4-CKX37-4782F-DBMRH"; Desc="IoT Enterprise (Annual Update)" },
-    @{ Name="Universal_BIOS";  Key="";                              Desc="Uses Laptop BIOS/UEFI Key" }
+    @{ Name="unattend_10_schneegans_LTSC_IoT";      Key="CGK42-GYN6Y-VD22B-BX98W-J8JXD"; Desc="IoT Enterprise LTSC" },
+    @{ Name="unattend_10_schneegans_enterprise";    Key="M7XTQ-FN8P6-TTKYV-9D4CC-J462D"; Desc="Standard Enterprise LTSC" },
+    @{ Name="unattend_10_schneegans";               Key="";                              Desc="Uses Laptop BIOS/UEFI Key" }
 )
 
 # --- PROCESSING ---
