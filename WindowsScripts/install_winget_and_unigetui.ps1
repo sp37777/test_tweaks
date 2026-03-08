@@ -11,7 +11,7 @@ Set-Location $PSScriptRoot
 Write-Host "--- Starting Optimization Check ---" -ForegroundColor Cyan
 
 # 1. Smart Check: NuGet Provider
-$nuGet = Get-PackageProvider -Name NuGet -ErrorAction SilentlyContinue
+$nuGet = Get-PackageProvider -Name NuGet -ListAvailable -ErrorAction SilentlyContinue
 if ($null -eq $nuGet -or [version]$nuGet.Version -lt [version]"2.8.5.201") {
     Write-Host "Installing/Updating NuGet provider..." -ForegroundColor Yellow
     Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -ErrorAction SilentlyContinue

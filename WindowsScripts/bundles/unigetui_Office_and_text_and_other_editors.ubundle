@@ -2,6 +2,13 @@
   "export_version": 3,
   "packages": [
     {
+      "Id": "9N3M9K3B8B0B",
+      "Name": "CustCalc Smart Calculator",
+      "Version": "Unknown",
+      "Source": "msstore",
+      "ManagerName": "Winget"
+    },
+    {
       "Id": "9P9MRBXJJG0M",
       "Name": "Collabora Office Desktop",
       "Version": "Unknown",
@@ -37,6 +44,20 @@
       "ManagerName": "Winget"
     },
     {
+      "Id": "Qalculate.Qalculate",
+      "Name": "Qalculate!",
+      "Version": "5.9.0",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "SpeedCrunch.SpeedCrunch",
+      "Name": "SpeedCrunch",
+      "Version": "0.12",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
       "Id": "SumatraPDF.SumatraPDF",
       "Name": "SumatraPDF",
       "Version": "3.5.2",
@@ -56,6 +77,13 @@
       "Version": "1.107.18627",
       "Source": "winget",
       "ManagerName": "Winget"
+    },
+    {
+      "Id": "oldcalc",
+      "Name": "Oldcalc",
+      "Version": "1.1.20200529",
+      "Source": "community",
+      "ManagerName": "Chocolatey"
     }
   ],
   "incompatible_packages_info": "Incompatible packages cannot be installed from UniGetUI, either because they came from a local source (for example Local PC) or because the package manager was unavailable. Nevertheless, they have been listed here for logging purposes.",
