@@ -1046,7 +1046,7 @@ $scripts = @(
 		} else {
 			# Windows 11: Hide the Search Icon (Value 0)
 			# Search is built into the Win11 Start menu, so the extra icon is unnecessary.
-			Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Search' -Name 'SearchboxMode' -Type 'DWord' -Value 0;
+			Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Search' -Name 'SearchboxTaskbarMode' -Type 'DWord' -Value 0;
 		}
 	};
 	{

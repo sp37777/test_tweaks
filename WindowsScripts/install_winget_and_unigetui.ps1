@@ -45,43 +45,5 @@ if ($null -eq $checkUI -or $checkUI.Count -lt 3) {
     Write-Host "UniGetUI is already installed. Skipping installation..." -ForegroundColor Green
 }
 
-# --- Bundle Launch Logic (Non-Admin Launch) ---
-
-# Wait for file association (UniGetUI registration)
-Write-Host "Checking for .ubundle file association..." -NoNewline
-$ready = $false
-for ($i = 0; $i -lt 10; $i++) {
-    if (Test-Path "Registry::HKEY_CLASSES_ROOT\.ubundle") {
-        Write-Host " Ready!" -ForegroundColor Green
-        $ready = $true; break
-    }
-    Write-Host "." -NoNewline
-    Start-Sleep -Seconds 1
-}
-
-if ($ready) {
-    $bundleFiles = Get-ChildItem -Path $PSScriptRoot -Filter "*.ubundle"
-
-    if ($bundleFiles.Count -gt 0) {
-        $targetFile = ""
-        if ($bundleFiles.Count -eq 1) {
-            $targetFile = $bundleFiles.FullName
-        } else {
-            Write-Host "`nMultiple bundles found. Please choose one:" -ForegroundColor Yellow
-            for ($i = 0; $i -lt $bundleFiles.Count; $i++) { Write-Host "[$($i + 1)] $($bundleFiles[$i].Name)" }
-            $choice = Read-Host "`nEnter number"
-            if ($choice -as [int] -and $choice -le $bundleFiles.Count) { $targetFile = $bundleFiles[$choice-1].FullName }
-        }
-
-        if ($targetFile) {
-            Write-Host "Launching $targetFile as regular user to avoid Admin warnings..." -ForegroundColor Cyan
-            # Launching via explorer.exe drops the Admin token
-            Start-Process "explorer.exe" -ArgumentList "`"$targetFile`""
-        }
-    }
-} else {
-    Write-Warning "`nCould not find UniGetUI file association. You may need to open it manually once."
-}
-
 Write-Host "`n--- Setup Complete ---" -ForegroundColor Green
 Read-Host "Press Enter to exit"

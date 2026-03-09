@@ -2,9 +2,30 @@
   "export_version": 3,
   "packages": [
     {
+      "Id": "9NKSQGP7F2NH",
+      "Name": "WhatsApp",
+      "Version": "Unknown",
+      "Source": "msstore",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Brave.Brave",
+      "Name": "Brave",
+      "Version": "145.1.87.192",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
       "Id": "Google.Chrome",
       "Name": "Google Chrome",
       "Version": "143.0.7499.193",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Hibbiki.Chromium",
+      "Name": "Chromium",
+      "Version": "144.0.7559.133",
       "Source": "winget",
       "ManagerName": "Winget"
     },
@@ -30,34 +51,6 @@
       "ManagerName": "Winget"
     },
     {
-      "Id": "Waterfox.Waterfox",
-      "Name": "Waterfox",
-      "Version": "6.6.7",
-      "Source": "winget",
-      "ManagerName": "Winget"
-    },
-    {
-      "Id": "Hibbiki.Chromium",
-      "Name": "Chromium",
-      "Version": "144.0.7559.133",
-      "Source": "winget",
-      "ManagerName": "Winget"
-    },
-    {
-      "Id": "eloston.ungoogled-chromium",
-      "Name": "ungoogled-chromium",
-      "Version": "144.0.7559.132",
-      "Source": "winget",
-      "ManagerName": "Winget"
-    },
-    {
-      "Id": "9NKSQGP7F2NH",
-      "Name": "WhatsApp",
-      "Version": "Unknown",
-      "Source": "msstore",
-      "ManagerName": "Winget"
-    },
-    {
       "Id": "Proton.ProtonMail",
       "Name": "Proton Mail",
       "Version": "1.11.0",
@@ -72,11 +65,34 @@
       "ManagerName": "Winget"
     },
     {
+      "Id": "Vivaldi.Vivaldi",
+      "Name": "Vivaldi",
+      "Version": "7.8.3925.76",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Waterfox.Waterfox",
+      "Name": "Waterfox",
+      "Version": "6.6.7",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
       "Id": "Zoom.Zoom",
       "Name": "Zoom Workplace",
       "Version": "6.7.26346",
       "Source": "winget",
       "ManagerName": "Winget"
+    },
+    {
+      "Id": "eloston.ungoogled-chromium",
+      "Name": "ungoogled-chromium",
+      "Version": "144.0.7559.132",
+      "Source": "winget",
+      "ManagerName": "Winget"
     }
-  ]
+  ],
+  "incompatible_packages_info": "Incompatible packages cannot be installed from UniGetUI, either because they came from a local source (for example Local PC) or because the package manager was unavailable. Nevertheless, they have been listed here for logging purposes.",
+  "incompatible_packages": []
 }

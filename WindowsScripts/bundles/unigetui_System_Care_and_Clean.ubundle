@@ -37,6 +37,20 @@
       "ManagerName": "Winget"
     },
     {
+      "Id": "WiseCleaner.WiseDuplicateFinder",
+      "Name": "Wise Duplicate Finder",
+      "Version": "2.1.8",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "krokiet",
+      "Name": "Krokiet",
+      "Version": "9.0.0",
+      "Source": "community",
+      "ManagerName": "Chocolatey"
+    },
+    {
       "Id": "qarmin.czkawka.gui",
       "Name": "Czkawka",
       "Version": "10.0.0",
@@ -49,13 +63,8 @@
       "Version": "3.1.6",
       "Source": "community",
       "ManagerName": "Chocolatey"
-    },
-    {
-      "Id": "WiseCleaner.WiseDuplicateFinder",
-      "Name": "Wise Duplicate Finder",
-      "Version": "2.1.8",
-      "Source": "winget",
-      "ManagerName": "Winget"
     }
-  ]
+  ],
+  "incompatible_packages_info": "Incompatible packages cannot be installed from UniGetUI, either because they came from a local source (for example Local PC) or because the package manager was unavailable. Nevertheless, they have been listed here for logging purposes.",
+  "incompatible_packages": []
 }
