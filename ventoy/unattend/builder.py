@@ -23,6 +23,9 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from xml.sax.saxutils import escape
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from backups import next_backup_path  # noqa: E402  (shared numbered-backup helper)
+
 WCM_NS = "http://schemas.microsoft.com/WMIConfig/2002/State"
 
 ENTERPRISE_KEY = "M7XTQ-FN8P6-TTKYV-9D4CC-J462D"
@@ -221,20 +224,6 @@ def prepare_variant(source_text: str, product_key: str | None) -> str:
     except ET.ParseError as exc:
         raise BuildError(f"Generated XML failed validation: {exc}") from exc
     return result
-
-
-def next_backup_path(destination: Path) -> Path:
-    """Return ``<stem>_<N><suffix>`` where N is one more than the highest
-    existing number for this destination (1 if there are none yet)."""
-    pattern = re.compile(
-        rf"^{re.escape(destination.stem)}_(\d+){re.escape(destination.suffix)}$"
-    )
-    highest = 0
-    for item in destination.parent.iterdir():
-        match = pattern.match(item.name)
-        if match:
-            highest = max(highest, int(match.group(1)))
-    return destination.with_name(f"{destination.stem}_{highest + 1}{destination.suffix}")
 
 
 def _write_outputs_atomically(outputs: dict[Path, bytes]) -> list[tuple[Path, Path]]:

@@ -1,29 +1,29 @@
 #!/usr/bin/env python3
-"""Update tools of the Ventoy collection from GitHub releases.
+"""Library: update a file from the latest GitHub release of a repository.
 
-For every entry in TARGETS the script
+This module has no targets of its own; scripts such as update_winutil.py
+describe *what* to update with a ``Target`` and call ``update_target()``
+(raises on failure) or ``update_targets()`` (several targets, errors are
+collected into the results).
+
+For one target the library
 1. asks the GitHub API for the latest release (or newest incl. pre-releases),
 2. finds the wanted asset by name,
 3. skips the download if the local file already has the published SHA-256,
 4. otherwise downloads to a temporary file, verifies size and SHA-256 (when
    GitHub publishes one), refuses HTML error pages,
 5. renames the current file to the next free ``<name>_<N><ext>`` backup,
-   installs the new file and prunes old backups (same scheme as builder.py).
-
-Add more tools by appending a ``Target`` to TARGETS. Other scripts can import
-this module and call ``update(...)``; it exposes ``NAME`` and ``update()`` like
-the other updaters. A failure of one target does not stop the others: errors
-are returned as results with status "error".
+   installs the new file and prunes old backups (see backups.py).
 
 Unauthenticated GitHub API use is limited to 60 requests/hour; set the
-GITHUB_TOKEN environment variable (read-only token is enough) to raise it. The
-token is only ever sent to the API, never to the download hosts.
+GITHUB_TOKEN environment variable (read-only token is enough) or pass
+``token=`` to raise it. The token is only ever sent to the API, never to the
+download hosts.
 Only Python's standard library is required.
 """
 
 from __future__ import annotations
 
-import argparse
 import fnmatch
 import hashlib
 import json
@@ -39,11 +39,7 @@ from pathlib import Path
 from typing import Iterable
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import builder  # noqa: E402
-import update_unattend  # noqa: E402  (shared backup pruning)
-
-NAME = "github"
-DESCRIPTION = "Update tools from GitHub releases (winutil, ...)"
+from backups import next_backup_path, prune_backups  # noqa: E402
 
 API_BASE = "https://api.github.com"
 GITHUB_BASE = "https://github.com"
@@ -51,29 +47,21 @@ HTTP_TIMEOUT = 30.0
 MAX_API_BYTES = 5 * 1024 * 1024
 DEFAULT_KEEP = 2
 USER_AGENT = "update_github.py (+Ventoy collection updater)"
-SCRIPT_DIR = Path(builder.__file__).resolve().parent
 
 _REPO_RE = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
 
 
 @dataclass(frozen=True)
 class Target:
-    name: str          # short name used with --only
+    """What to update. ``dest`` must be an absolute path: callers build it from
+    their own location (e.g. ``Path(__file__).resolve().parent / "x.ps1"``)."""
+
+    name: str          # short name used in log lines
     repo: str          # "owner/name"
     asset: str         # release asset file name; fnmatch patterns such as "x-*.zip" allowed
-    dest: str          # where to put it: relative to this script's folder, or absolute
+    dest: Path         # absolute path of the local file
     prerelease: bool = False   # True: newest release including pre-releases
     max_size: int = 50 * 1024 * 1024
-
-
-TARGETS: tuple[Target, ...] = (
-    Target(
-        name="winutil",
-        repo="ChrisTitusTech/winutil",
-        asset="winutil.ps1",
-        dest="winutil.ps1",  # adjust to wherever the file lives in your collection
-    ),
-)
 
 
 class GithubError(Exception):
@@ -204,7 +192,18 @@ def _download(url: str, directory: Path, name: str, limit: int) -> tuple[Path, s
     return temp_path, h.hexdigest(), size
 
 
-def update_target(target: Target, keep: int, token: str | None, log) -> TargetResult:
+def update_target(
+    target: Target,
+    keep: int = DEFAULT_KEEP,
+    token: str | None = None,
+    log=print,
+) -> TargetResult:
+    """Update one target. Raises GithubError if anything is wrong; in that case
+    the local file and its backups are left untouched."""
+    token = token if token is not None else os.environ.get("GITHUB_TOKEN")
+    dest = Path(target.dest)
+    if not dest.is_absolute():
+        raise GithubError(f"Target {target.name!r}: dest must be an absolute path.")
     release = fetch_release(target, token)
     tag = release.get("tag_name") or "?"
     asset = find_asset(release, target.asset)
@@ -215,9 +214,6 @@ def update_target(target: Target, keep: int, token: str | None, log) -> TargetRe
     if not url.startswith(allowed):
         raise GithubError("Refusing a download URL outside the repository's releases.")
 
-    dest = Path(target.dest)
-    if not dest.is_absolute():
-        dest = SCRIPT_DIR / dest
     local_hash = _sha256_of(dest) if dest.is_file() else None
     log(f"{target.name}: release {tag}, asset {asset['name']} ({asset.get('size', '?')} bytes)")
 
@@ -245,7 +241,7 @@ def update_target(target: Target, keep: int, token: str | None, log) -> TargetRe
 
         backup: Path | None = None
         if dest.exists():
-            backup = builder.next_backup_path(dest)
+            backup = next_backup_path(dest)
             os.replace(dest, backup)
         try:
             os.replace(temp_path, dest)
@@ -256,32 +252,22 @@ def update_target(target: Target, keep: int, token: str | None, log) -> TargetRe
     finally:
         temp_path.unlink(missing_ok=True)
 
-    pruned = update_unattend.prune_backups(dest.parent, [dest.name], keep)
+    pruned = prune_backups(dest.parent, [dest.name], keep)
     return TargetResult(target.name, "updated", tag, dest, backup, pruned)
 
 
 # --------------------------------------------------------------------------
-# Entry points
+# Several targets / reporting
 # --------------------------------------------------------------------------
-def update(
-    only: Iterable[str] | None = None,
+def update_targets(
+    targets: Iterable[Target],
     keep: int = DEFAULT_KEEP,
     token: str | None = None,
-    targets: Iterable[Target] | None = None,
     log=print,
 ) -> list[TargetResult]:
-    """Update the selected targets (all by default); never raises per target."""
-    pool = tuple(targets) if targets is not None else TARGETS
-    if only:
-        wanted = set(only)
-        unknown = wanted - {t.name for t in pool}
-        if unknown:
-            raise GithubError(f"Unknown target(s): {', '.join(sorted(unknown))}")
-        pool = tuple(t for t in pool if t.name in wanted)
-    token = token if token is not None else os.environ.get("GITHUB_TOKEN")
-
+    """Update several targets; a failure of one does not stop the others."""
     results: list[TargetResult] = []
-    for target in pool:
+    for target in targets:
         try:
             results.append(update_target(target, keep, token, log))
         except (GithubError, OSError) as exc:
@@ -290,36 +276,15 @@ def update(
     return results
 
 
-def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=DESCRIPTION)
-    parser.add_argument("--only", action="append", metavar="NAME",
-                        help="update only this target (repeatable)")
-    parser.add_argument("--list", action="store_true", help="list configured targets and exit")
-    parser.add_argument("--keep", type=int, default=DEFAULT_KEEP, metavar="N",
-                        help=f"backups to keep per file, newest first (default: {DEFAULT_KEEP})")
-    args = parser.parse_args(argv)
-
-    if args.list:
-        for t in TARGETS:
-            print(f"{t.name}: {t.repo} / {t.asset} -> {t.dest}")
-        return 0
-    try:
-        results = update(only=args.only, keep=args.keep)
-    except GithubError as exc:
-        print(f"Error: {exc}", file=sys.stderr)
-        return 1
-
-    for r in results:
-        if r.status == "updated":
-            if r.backup:
-                print(f"Backup:    {r.dest.name} -> {r.backup.name}")
-            print(f"Updated:   {r.name} ({r.tag}) -> {r.dest}")
-            for path in r.pruned:
-                print(f"Deleted:   {path.name}")
-        elif r.status == "up-to-date":
-            print(f"Up to date: {r.name} ({r.tag}) - {r.message}")
-    return 1 if any(r.status == "error" for r in results) else 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
+def format_result(result: TargetResult) -> list[str]:
+    """Console lines describing a result, in the same style as the other updaters."""
+    if result.status == "updated":
+        lines = []
+        if result.backup and result.dest:
+            lines.append(f"Backup:    {result.dest.name} -> {result.backup.name}")
+        lines.append(f"Updated:   {result.name} ({result.tag}) -> {result.dest}")
+        lines += [f"Deleted:   {path.name}" for path in result.pruned]
+        return lines
+    if result.status == "up-to-date":
+        return [f"Up to date: {result.name} ({result.tag}) - {result.message}"]
+    return [f"Error:      {result.name}: {result.message}"]

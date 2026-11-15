@@ -43,6 +43,7 @@ import urllib.request
 from urllib.parse import parse_qsl, urlsplit, urlunsplit
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from backups import next_backup_path, prune_backups  # noqa: E402
 import builder  # noqa: E402  (needs the path tweak above)
 
 NAME = "unattend"
@@ -269,33 +270,6 @@ def _browser_download(
 # --------------------------------------------------------------------------
 # Backups
 # --------------------------------------------------------------------------
-def prune_backups(directory: Path, filenames: list[str], keep: int) -> list[Path]:
-    """Delete old ``<stem>_<N><suffix>`` backups, keeping the ``keep`` newest.
-
-    "Newest" means the highest numbers, because builder numbers backups
-    upwards over time. Returns the deleted paths.
-    """
-    removed: list[Path] = []
-    for filename in filenames:
-        name = Path(filename)
-        pattern = re.compile(
-            rf"^{re.escape(name.stem)}_(\d+){re.escape(name.suffix)}$"
-        )
-        found = sorted(
-            (
-                (int(m.group(1)), item)
-                for item in directory.iterdir()
-                if (m := pattern.match(item.name))
-            ),
-            key=lambda pair: pair[0],
-            reverse=True,
-        )
-        for _, item in found[max(keep, 0):]:
-            item.unlink()
-            removed.append(item)
-    return removed
-
-
 def _install_new_source(source_path: Path, new_bytes: bytes) -> Path | None:
     """Move the current source to a numbered backup and put new_bytes in place.
 
@@ -313,7 +287,7 @@ def _install_new_source(source_path: Path, new_bytes: bytes) -> Path | None:
             stream.flush()
             os.fsync(stream.fileno())
         if source_path.exists():
-            backup = builder.next_backup_path(source_path)
+            backup = next_backup_path(source_path)
             os.replace(source_path, backup)
         try:
             os.replace(temp_path, source_path)
