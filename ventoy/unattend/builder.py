@@ -23,7 +23,18 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+def _add_utils_to_path() -> None:
+    """Make Scripts/Utils importable wherever this file sits inside the repo."""
+    for parent in Path(__file__).resolve().parents:
+        utils = parent / "Scripts" / "Utils"
+        if (utils / "backups.py").is_file():
+            if str(utils) not in sys.path:
+                sys.path.insert(0, str(utils))
+            return
+    raise ImportError("Scripts/Utils/backups.py not found in any parent folder")
+
+
+_add_utils_to_path()
 from backups import next_backup_path  # noqa: E402  (shared numbered-backup helper)
 
 WCM_NS = "http://schemas.microsoft.com/WMIConfig/2002/State"

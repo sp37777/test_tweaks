@@ -42,9 +42,21 @@ import urllib.error
 import urllib.request
 from urllib.parse import parse_qsl, urlsplit, urlunsplit
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # builder.py lives next to this file
+def _add_utils_to_path() -> None:
+    """Make Scripts/Utils importable wherever this file sits inside the repo."""
+    for parent in Path(__file__).resolve().parents:
+        utils = parent / "Scripts" / "Utils"
+        if (utils / "backups.py").is_file():
+            if str(utils) not in sys.path:
+                sys.path.insert(0, str(utils))
+            return
+    raise ImportError("Scripts/Utils/backups.py not found in any parent folder")
+
+
+_add_utils_to_path()
 from backups import next_backup_path, prune_backups  # noqa: E402
-import builder  # noqa: E402  (needs the path tweak above)
+import builder  # noqa: E402
 
 NAME = "unattend"
 DESCRIPTION = "Update autounattend.xml from schneegans.de and rebuild unattend_10_*.xml"

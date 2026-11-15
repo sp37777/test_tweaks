@@ -18,8 +18,19 @@ import dataclasses
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from ...Utils import update_github as gh  # noqa: E402
+def _add_utils_to_path() -> None:
+    """Make Scripts/Utils importable wherever this file sits inside the repo."""
+    for parent in Path(__file__).resolve().parents:
+        utils = parent / "Scripts" / "Utils"
+        if (utils / "backups.py").is_file():
+            if str(utils) not in sys.path:
+                sys.path.insert(0, str(utils))
+            return
+    raise ImportError("Scripts/Utils/backups.py not found in any parent folder")
+
+
+_add_utils_to_path()
+import update_github as gh  # noqa: E402
 
 NAME = "winutil"
 DESCRIPTION = "Update winutil.ps1 from the latest ChrisTitusTech/winutil release"
