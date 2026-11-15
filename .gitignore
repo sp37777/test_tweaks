@@ -34,3 +34,4 @@ Install_keys.txt
 !ventoy*.disk.img.xz
 winutil*.ps1
 fstab*
+__pycache__
