@@ -1,0 +1,19 @@
+{
+  "export_version": 3,
+  "packages": [
+    {
+      "Id": "KDE.Marble",
+      "Name": "Marble",
+      "Version": "2.2.0",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "OpenStreetMap.Josm",
+      "Name": "JOSM",
+      "Version": "19439",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    }
+  ]
+}

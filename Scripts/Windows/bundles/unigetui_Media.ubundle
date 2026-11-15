@@ -1,0 +1,145 @@
+{
+  "export_version": 3,
+  "packages": [
+    {
+      "Id": "KDE.Kdenlive",
+      "Name": "Kdenlive",
+      "Version": "25.12.0",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Meltytech.Shotcut",
+      "Name": "Shotcut",
+      "Version": "25.12.31",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "OBSProject.OBSStudio",
+      "Name": "OBS Studio",
+      "Version": "32.0.4",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "CodecGuide.K-LiteCodecPack.Basic",
+      "Name": "K-Lite Codec Pack Basic",
+      "Version": "19.4.0",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "CodecGuide.K-LiteCodecPack.Full",
+      "Name": "K-Lite Codec Pack Full",
+      "Version": "19.4.0",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "CodecGuide.K-LiteCodecPack.Standard",
+      "Name": "K-Lite Codec Pack Standard",
+      "Version": "19.4.0",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Nevcairiel.LAVFilters",
+      "Name": "LAV Filters",
+      "Version": "0.80",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "9NBLGGH40D70",
+      "Name": "ALLPlayer",
+      "Version": "Unknown",
+      "Source": "msstore",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Daum.PotPlayer",
+      "Name": "PotPlayer",
+      "Version": "25.09.09.0",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "SMPlayer.SMPlayer",
+      "Name": "SMPlayer",
+      "Version": "25.6.0",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "VideoLAN.VLC",
+      "Name": "VLC media player",
+      "Version": "3.0.23",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Winamp.Winamp",
+      "Name": "Winamp",
+      "Version": "5.92.0",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "mpv.net",
+      "Name": "mpv.net",
+      "Version": "7.1.1.0",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "GIMP.GIMP.3",
+      "Name": "GIMP",
+      "Version": "3.0.6.1",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "KDE.Krita",
+      "Name": "Krita",
+      "Version": "5.2.14.0",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "ShareX.ShareX",
+      "Name": "ShareX",
+      "Version": "18.0.1",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "dotPDN.PaintDotNet",
+      "Name": "paint.net",
+      "Version": "5.1.11",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "FastStone.Viewer",
+      "Name": "FastStone Image Viewer",
+      "Version": "8.2",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "9PB51GM7M33J",
+      "Name": "foobar2000",
+      "Version": "Unknown",
+      "Source": "msstore",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "PeterPawlowski.foobar2000",
+      "Name": "foobar2000",
+      "Version": "2.25.6",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    }
+  ]
+}

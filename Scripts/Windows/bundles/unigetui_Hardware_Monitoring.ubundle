@@ -1,0 +1,47 @@
+{
+  "export_version": 3,
+  "packages": [
+    {
+      "Id": "CPUID.CPU-Z",
+      "Name": "CPUID CPU-Z",
+      "Version": "2.18",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "CrystalDewWorld.CrystalDiskInfo",
+      "Name": "CrystalDiskInfo",
+      "Version": "9.7.2",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "CrystalDewWorld.CrystalDiskMark",
+      "Name": "CrystalDiskMark",
+      "Version": "9.0.1",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "REALiX.HWiNFO",
+      "Name": "HWiNFO®",
+      "Version": "8.40",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "TechPowerUp.GPU-Z",
+      "Name": "TechPowerUp GPU-Z",
+      "Version": "2.68.0",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "TechPowerUp.NVCleanstall",
+      "Name": "NVCleanstall",
+      "Version": "1.19.0",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    }
+  ]
+}

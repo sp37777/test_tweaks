@@ -1,0 +1,61 @@
+{
+  "export_version": 3,
+  "packages": [
+    {
+      "Id": "Bitdefender.Bitdefender",
+      "Name": "BitDefender Agent",
+      "Version": "26.0.1.233",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Malwarebytes.AdwCleaner",
+      "Name": "AdwCleaner",
+      "Version": "8.6.0.613",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Malwarebytes.Malwarebytes",
+      "Name": "Malwarebytes",
+      "Version": "5.1.4.112",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "OpenVPNTechnologies.OpenVPN",
+      "Name": "OpenVPN",
+      "Version": "2.6.1701",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "Proton.ProtonVPN",
+      "Name": "Proton VPN",
+      "Version": "4.3.11",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "VirusTotal.VirusTotalUploader",
+      "Name": "VirusTotal Uploader",
+      "Version": "2.2",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "WireGuard.WireGuard",
+      "Name": "WireGuard",
+      "Version": "0.5.3",
+      "Source": "winget",
+      "ManagerName": "Winget"
+    },
+    {
+      "Id": "softether-vpn-client",
+      "Name": "Softether Vpn Client",
+      "Version": "4.39.9772",
+      "Source": "community",
+      "ManagerName": "Chocolatey"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+    "control":[
+        { "VTOY_DEFAULT_MENU_MODE": "1" },
+        { "VTOY_DEFAULT_SEARCH_ROOT": "/Images" },
+		{ "VTOY_LINUX_REMOUNT": "1" }
+    ],
+    "theme_legacy":{
+        "display_mode": "CLI"
+    },
+    "theme_uefi":{
+        "display_mode": "GUI"
+    },
+    "auto_install":[
+        {
+            "parent": "/Images/Windows/7",
+            "template":[
+                "/ventoy/unattend/unattend_7.xml"
+            ]
+        },
+        {
+            "parent": "/Images/Windows/81",
+            "template":[
+                "/ventoy/unattend/unattend_81.xml"
+            ]
+        },
+        {
+            "parent": "/Images/Windows/10_11",
+            "template":[
+                "/ventoy/unattend/autounattend_10_11_schneegans_GAC.xml",
+				"/ventoy/unattend/autounattend.xml"
+            ]
+        },
+        {
+            "parent": "/Images/Windows/ltsc",
+            "template":[
+                "/ventoy/unattend/autounattend_10_11_schneegans_GAC.xml",
+				"/ventoy/unattend/autounattend.xml"
+            ]
+        }
+    ],
+    "injection": [
+        {
+            "parent": "/Images/Windows/ltsc",
+            "archive": "/ei_injection.zip"
+        }
+    ]
+}
