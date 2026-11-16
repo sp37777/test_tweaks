@@ -11,7 +11,6 @@ import re
 from pathlib import Path
 from typing import Iterable
 
-
 def _backup_pattern(path: Path) -> re.Pattern[str]:
     return re.compile(rf"^{re.escape(path.stem)}_(\d+){re.escape(path.suffix)}$")
 

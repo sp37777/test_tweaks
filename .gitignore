@@ -35,3 +35,4 @@ Install_keys.txt
 winutil*.ps1
 fstab*
 __pycache__
+.sync.ffs_db

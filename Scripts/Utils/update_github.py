@@ -40,6 +40,7 @@ from typing import Iterable
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from backups import next_backup_path, prune_backups  # noqa: E402
+sys.dont_write_bytecode = True
 
 API_BASE = "https://api.github.com"
 GITHUB_BASE = "https://github.com"

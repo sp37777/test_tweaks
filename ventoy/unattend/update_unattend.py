@@ -42,6 +42,7 @@ import urllib.error
 import urllib.request
 from urllib.parse import parse_qsl, urlsplit, urlunsplit
 
+sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).resolve().parent))  # builder.py lives next to this file
 def _add_utils_to_path() -> None:
     """Make Scripts/Utils importable wherever this file sits inside the repo."""
