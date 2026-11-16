@@ -18,6 +18,7 @@ import dataclasses
 import sys
 from pathlib import Path
 
+sys.dont_write_bytecode = True
 def _add_utils_to_path() -> None:
     """Make Scripts/Utils importable wherever this file sits inside the repo."""
     for parent in Path(__file__).resolve().parents:
