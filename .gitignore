@@ -36,3 +36,4 @@ winutil*.ps1
 fstab*
 __pycache__
 .sync.ffs_db
+MAS_AIO.cmd
