@@ -1,1 +1,0 @@
-powershell set-executionpolicy unrestricted -scope currentuser -force
