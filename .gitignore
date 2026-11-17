@@ -28,5 +28,4 @@ ublock-backup*
 
 /Scripts/Windows/*/
 !/Scripts/Windows/drivers/
-!/Scripts/Windows/**/
 !/Scripts/Windows/**/update_*.py
