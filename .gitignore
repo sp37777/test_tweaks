@@ -26,6 +26,7 @@ __pycache__
 .sync.ffs_db
 ublock-backup*
 
+/Images/*
 /Scripts/Windows/*/
 !/Scripts/Windows/drivers/
 !/Scripts/Windows/**/update_*.py
