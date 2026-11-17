@@ -1,19 +1,34 @@
 #!/usr/bin/env python3
-"""Library: update a file from the latest GitHub release of a repository.
+"""Library: keep a local file in sync with a file published on GitHub.
 
 This module has no targets of its own; scripts such as update_winutil.py
 describe *what* to update with a ``Target`` and call ``update_target()``
 (raises on failure) or ``update_targets()`` (several targets, errors are
-collected into the results).
+collected into the results). It can also be run directly (see "Command line").
 
-For one target the library
-1. asks the GitHub API for the latest release (or newest incl. pre-releases),
-2. finds the wanted asset by name,
-3. skips the download if the local file already has the published SHA-256,
-4. otherwise downloads to a temporary file, verifies size and SHA-256 (when
-   GitHub publishes one), refuses HTML error pages,
-5. renames the current file to the next free ``<name>_<N><ext>`` backup,
-   installs the new file and prunes old backups (see backups.py).
+Two kinds of target
+-------------------
+* release asset (``Target(name, repo, asset, dest)``): a file attached to the
+  latest GitHub release. Skipped when the local file already has the SHA-256
+  that GitHub publishes for the asset; size and SHA-256 are verified.
+* repository file (``Target.repo_file(name, repo, path, dest, ref=...)``): a
+  file inside the repository itself, for projects whose releases contain only
+  source code. ``ref`` is "release" (default: the tag of the latest release),
+  "HEAD" (tip of the default branch) or any branch/tag/commit name. Skipped
+  when the local file has the git object id GitHub reports for that path, and
+  the download is verified against that id.
+
+Both kinds download to a temporary file, refuse HTML error pages, rename the
+current file to the next free ``<name>_<N><ext>`` backup, install the new file
+and prune old backups (see backups.py).
+
+Command line
+------------
+    update_github.py OWNER/REPO --asset NAME --dest PATH
+    update_github.py OWNER/REPO --file PATH/IN/REPO --dest PATH [--ref REF]
+
+``--dest`` is a file path or an existing directory (the file keeps its name).
+Add ``--prerelease`` to consider pre-releases when ``--ref release`` is used.
 
 Unauthenticated GitHub API use is limited to 60 requests/hour; set the
 GITHUB_TOKEN environment variable (read-only token is enough) or pass
@@ -24,6 +39,7 @@ Only Python's standard library is required.
 
 from __future__ import annotations
 
+import argparse
 import fnmatch
 import hashlib
 import json
@@ -35,8 +51,9 @@ import time
 import urllib.error
 import urllib.request
 from dataclasses import dataclass, field
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Iterable
+from urllib.parse import quote
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from backups import next_backup_path, prune_backups  # noqa: E402
@@ -44,6 +61,7 @@ sys.dont_write_bytecode = True
 
 API_BASE = "https://api.github.com"
 GITHUB_BASE = "https://github.com"
+RAW_BASE = "https://raw.githubusercontent.com"
 HTTP_TIMEOUT = 30.0
 MAX_API_BYTES = 5 * 1024 * 1024
 DEFAULT_KEEP = 2
@@ -55,7 +73,10 @@ _REPO_RE = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
 @dataclass(frozen=True)
 class Target:
     """What to update. ``dest`` must be an absolute path: callers build it from
-    their own location (e.g. ``Path(__file__).resolve().parent / "x.ps1"``)."""
+    their own location (e.g. ``Path(__file__).resolve().parent / "x.ps1"``).
+
+    Set ``asset`` (release asset) or ``path`` (file in the repository), not
+    both; ``Target.repo_file()`` is the convenient way to make the latter."""
 
     name: str          # short name used in log lines
     repo: str          # "owner/name"
@@ -63,6 +84,14 @@ class Target:
     dest: Path         # absolute path of the local file
     prerelease: bool = False   # True: newest release including pre-releases
     max_size: int = 50 * 1024 * 1024
+    path: str = ""     # repository file mode: path of the file inside the repository
+    ref: str = "release"       # repository file mode: "release", "HEAD" or a branch/tag/commit
+
+    @classmethod
+    def repo_file(cls, name: str, repo: str, path: str, dest: Path, ref: str = "release",
+                  prerelease: bool = False, max_size: int = 50 * 1024 * 1024) -> "Target":
+        return cls(name=name, repo=repo, asset="", dest=dest, prerelease=prerelease,
+                   max_size=max_size, path=path, ref=ref)
 
 
 class GithubError(Exception):
@@ -193,18 +222,47 @@ def _download(url: str, directory: Path, name: str, limit: int) -> tuple[Path, s
     return temp_path, h.hexdigest(), size
 
 
-def update_target(
-    target: Target,
-    keep: int = DEFAULT_KEEP,
-    token: str | None = None,
-    log=print,
-) -> TargetResult:
-    """Update one target. Raises GithubError if anything is wrong; in that case
-    the local file and its backups are left untouched."""
-    token = token if token is not None else os.environ.get("GITHUB_TOKEN")
-    dest = Path(target.dest)
-    if not dest.is_absolute():
-        raise GithubError(f"Target {target.name!r}: dest must be an absolute path.")
+def _git_blob_sha1_of(path: Path) -> str:
+    """Git object id of a file's content: sha1(b"blob <size>\\0" + content)."""
+    h = hashlib.sha1(f"blob {path.stat().st_size}\0".encode())
+    with open(path, "rb") as stream:
+        for chunk in iter(lambda: stream.read(65536), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def _looks_like_html(temp_path: Path, dest: Path) -> bool:
+    """True if a download that should not be HTML is an HTML (error) page."""
+    if dest.suffix.lower() in (".htm", ".html"):
+        return False
+    with open(temp_path, "rb") as stream:
+        head = stream.read(512).lower()
+    return b"<html" in head or b"<!doctype html" in head
+
+
+def _install(temp_path: Path, dest: Path, keep: int) -> tuple[Path | None, list[Path]]:
+    """Back up the current file (next free _N), put the new one in place, prune."""
+    backup: Path | None = None
+    if dest.exists():
+        backup = next_backup_path(dest)
+        os.replace(dest, backup)
+    try:
+        os.replace(temp_path, dest)
+    except OSError:
+        if backup is not None:
+            os.replace(backup, dest)
+        raise
+    return backup, prune_backups(dest.parent, [dest.name], keep)
+
+
+def _clean_repo_path(path: str) -> str:
+    parts = PurePosixPath(path.strip("/")).parts
+    if not parts or "\\" in path or any(part in (".", "..") for part in parts):
+        raise GithubError(f"Invalid path inside the repository: {path!r}")
+    return "/".join(parts)
+
+
+def _update_asset(target: Target, dest: Path, keep: int, token: str | None, log) -> TargetResult:
     release = fetch_release(target, token)
     tag = release.get("tag_name") or "?"
     asset = find_asset(release, target.asset)
@@ -231,30 +289,99 @@ def update_target(
             log(f"{target.name}: GitHub published no SHA-256 for this asset; only the size was checked.")
         elif new_hash != expected:
             raise GithubError("SHA-256 of the download does not match the published digest.")
-        with open(temp_path, "rb") as stream:
-            head = stream.read(512).lower()
-        if b"<html" in head or b"<!doctype html" in head:
+        if _looks_like_html(temp_path, dest):
             raise GithubError("The download is an HTML page, not the expected file.")
 
         if local_hash == new_hash:
             temp_path.unlink(missing_ok=True)
             return TargetResult(target.name, "up-to-date", tag, dest, message="content identical")
 
-        backup: Path | None = None
-        if dest.exists():
-            backup = next_backup_path(dest)
-            os.replace(dest, backup)
-        try:
-            os.replace(temp_path, dest)
-        except OSError:
-            if backup is not None:
-                os.replace(backup, dest)
-            raise
+        backup, pruned = _install(temp_path, dest, keep)
     finally:
         temp_path.unlink(missing_ok=True)
-
-    pruned = prune_backups(dest.parent, [dest.name], keep)
     return TargetResult(target.name, "updated", tag, dest, backup, pruned)
+
+
+def _resolve_ref(target: Target, token: str | None) -> str | None:
+    """Branch/tag to read the file from; None means the default branch's tip."""
+    ref = target.ref or "release"
+    if ref == "HEAD":
+        return None
+    if ref != "release":
+        return ref
+    try:
+        release = fetch_release(target, token)
+    except GithubError as exc:
+        hint = ""
+        if "404" in str(exc):
+            hint = (" If the repository has no releases, set ref='HEAD' (default branch) "
+                    "or a branch/tag name.")
+        raise GithubError(f"Cannot resolve the latest release of {target.repo}: {exc}{hint}") from exc
+    tag = release.get("tag_name")
+    if not tag:
+        raise GithubError("The latest release has no tag name.")
+    return tag
+
+
+def _update_repo_file(target: Target, dest: Path, keep: int, token: str | None, log) -> TargetResult:
+    path = _clean_repo_path(target.path)
+    ref = _resolve_ref(target, token)
+    label = ref or "HEAD"
+    query = f"?ref={quote(ref, safe='')}" if ref else ""
+    info = _api_get(f"/repos/{target.repo}/contents/{quote(path, safe='/')}{query}", token)
+
+    if isinstance(info, list):
+        raise GithubError(f"{path!r} is a directory, not a file.")
+    if not isinstance(info, dict) or info.get("type") != "file":
+        raise GithubError(f"{path!r} is not a regular file in {target.repo}@{label}.")
+    blob = str(info.get("sha", "")).lower()
+    size_expected = info.get("size")
+    url = str(info.get("download_url") or "")
+    if not re.fullmatch(r"[0-9a-f]{40}", blob) or not isinstance(size_expected, int):
+        raise GithubError("Unexpected file data from the GitHub API.")
+    if not url.lower().startswith(f"{RAW_BASE}/{target.repo}/".lower()):
+        raise GithubError("Refusing a download URL outside the repository.")
+    log(f"{target.name}: {target.repo}@{label}:{path} ({size_expected} bytes)")
+
+    local_blob = _git_blob_sha1_of(dest) if dest.is_file() else None
+    if local_blob == blob:
+        return TargetResult(target.name, "up-to-date", label, dest, message="same as the repository file")
+
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    temp_path, _, size = _download(url, dest.parent, dest.name, min(target.max_size, size_expected))
+    try:
+        if size != size_expected:
+            raise GithubError(f"Size mismatch: got {size} bytes, expected {size_expected}.")
+        if _git_blob_sha1_of(temp_path) != blob:
+            raise GithubError("The download does not match the git object id GitHub reported "
+                              "(the file may have changed meanwhile); try again.")
+        if _looks_like_html(temp_path, dest):
+            raise GithubError("The download is an HTML page, not the expected file.")
+        backup, pruned = _install(temp_path, dest, keep)
+    finally:
+        temp_path.unlink(missing_ok=True)
+    return TargetResult(target.name, "updated", label, dest, backup, pruned)
+
+
+def update_target(
+    target: Target,
+    keep: int = DEFAULT_KEEP,
+    token: str | None = None,
+    log=print,
+) -> TargetResult:
+    """Update one target. Raises GithubError if anything is wrong; in that case
+    the local file and its backups are left untouched."""
+    token = token if token is not None else os.environ.get("GITHUB_TOKEN")
+    dest = Path(target.dest)
+    if not dest.is_absolute():
+        raise GithubError(f"Target {target.name!r}: dest must be an absolute path.")
+    if bool(target.asset) == bool(target.path):
+        raise GithubError(f"Target {target.name!r}: set exactly one of asset or path.")
+    if not _REPO_RE.match(target.repo):
+        raise GithubError(f"Invalid repository name: {target.repo!r}")
+    if target.path:
+        return _update_repo_file(target, dest, keep, token, log)
+    return _update_asset(target, dest, keep, token, log)
 
 
 # --------------------------------------------------------------------------
@@ -289,3 +416,48 @@ def format_result(result: TargetResult) -> list[str]:
     if result.status == "up-to-date":
         return [f"Up to date: {result.name} ({result.tag}) - {result.message}"]
     return [f"Error:      {result.name}: {result.message}"]
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description="Update a local file from a GitHub release asset or a repository file."
+    )
+    parser.add_argument("repo", metavar="OWNER/REPO")
+    what = parser.add_mutually_exclusive_group(required=True)
+    what.add_argument("--asset", metavar="NAME", help="release asset name (patterns like 'x-*.zip' allowed)")
+    what.add_argument("--file", metavar="PATH", help="file path inside the repository")
+    parser.add_argument("--dest", required=True, metavar="PATH",
+                        help="local file path, or an existing directory (the file keeps its name)")
+    parser.add_argument("--ref", default="release", metavar="REF",
+                        help="with --file: 'release' (latest release tag, default), 'HEAD' "
+                             "(default branch) or a branch/tag/commit")
+    parser.add_argument("--prerelease", action="store_true", help="consider pre-releases")
+    parser.add_argument("--keep", type=int, default=DEFAULT_KEEP, metavar="N",
+                        help=f"backups to keep, newest first (default: {DEFAULT_KEEP})")
+    args = parser.parse_args(argv)
+
+    dest = Path(args.dest).expanduser().resolve()
+    remote_name = Path(args.file).name if args.file else args.asset
+    if dest.is_dir():
+        if any(ch in remote_name for ch in "*?["):
+            print("Error: --dest must be a file path when the asset name is a pattern.", file=sys.stderr)
+            return 1
+        dest = dest / remote_name
+
+    if args.file:
+        target = Target.repo_file(remote_name, args.repo, args.file, dest, ref=args.ref,
+                                  prerelease=args.prerelease)
+    else:
+        target = Target(remote_name, args.repo, args.asset, dest, prerelease=args.prerelease)
+    try:
+        result = update_target(target, keep=args.keep)
+    except (GithubError, OSError) as exc:
+        print(f"Error: {exc}", file=sys.stderr)
+        return 1
+    for line in format_result(result):
+        print(line)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
