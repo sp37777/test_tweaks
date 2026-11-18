@@ -14,7 +14,7 @@
 		<component name="Microsoft-Windows-Setup" processorArchitecture="x86" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
 			<UserData>
 				<ProductKey>
-					<Key>KBN8V-HFGQ4-MGXVD-347P6-PDQGT</Key>
+					<Key></Key>
 					<WillShowUI>OnError</WillShowUI>
 				</ProductKey>
 				<AcceptEula>true</AcceptEula>
@@ -78,20 +78,20 @@
 					<Path>cmd.exe /c &gt;&gt;X:\defender.vbs (echo:WScript.Echo ^"Found and successfully modified SYSTEM registry hive file at '^" + file + ^"'. This window will now close.^"&amp;echo:WScript.Sleep 5000&amp;echo:Exit Do&amp;echo:End If&amp;echo:WScript.Sleep 1000&amp;echo:Next&amp;echo:Loop)</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
-					<Order>15</Order>
+                    <Order>15</Order>
                     <Description>Launch Master GUI</Description>
-					<Path>cmd /c "for %i in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do if exist %i:\ventoy\script\winpe.cmd (%i:\ventoy\script\winpe.cmd -c "10_choices.ini")"</Path>
+					<Path>cmd /c "for %i in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do if exist %i:\Scripts\Setup\winpe.cmd (%i:\Scripts\Setup\winpe.cmd -c "10_choices.ini")"</Path>
                 </RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>16</Order>
-					<Path>cmd.exe /c "for %i in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do if exist %i:\ventoy\script\CheckDefender.cmd (start /b cmd.exe /c %i:\ventoy\script\CheckDefender.cmd %i)"</Path>
+					<Path>cmd.exe /c "for %i in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do if exist %i:\Scripts\Setup\CheckDefender.cmd (start /b cmd.exe /c %i:\Scripts\Setup\CheckDefender.cmd %i)"</Path>
 				</RunSynchronousCommand>
 			</RunSynchronous>
 		</component>
 		<component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
 			<UserData>
 				<ProductKey>
-					<Key>KBN8V-HFGQ4-MGXVD-347P6-PDQGT</Key>
+					<Key></Key>
 					<WillShowUI>OnError</WillShowUI>
 				</ProductKey>
 				<AcceptEula>true</AcceptEula>
@@ -155,13 +155,13 @@
 					<Path>cmd.exe /c &gt;&gt;X:\defender.vbs (echo:WScript.Echo ^"Found and successfully modified SYSTEM registry hive file at '^" + file + ^"'. This window will now close.^"&amp;echo:WScript.Sleep 5000&amp;echo:Exit Do&amp;echo:End If&amp;echo:WScript.Sleep 1000&amp;echo:Next&amp;echo:Loop)</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
-					<Order>15</Order>
+                    <Order>15</Order>
                     <Description>Launch Master GUI</Description>
-					<Path>cmd /c "for %i in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do if exist %i:\ventoy\script\winpe.cmd (%i:\ventoy\script\winpe.cmd -c "10_choices.ini")"</Path>
+					<Path>cmd /c "for %i in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do if exist %i:\Scripts\Setup\winpe.cmd (%i:\Scripts\Setup\winpe.cmd -c "10_choices.ini")"</Path>
                 </RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>16</Order>
-					<Path>cmd.exe /c "for %i in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do if exist %i:\ventoy\script\CheckDefender.cmd (start /b cmd.exe /c %i:\ventoy\script\CheckDefender.cmd %i)"</Path>
+					<Path>cmd.exe /c "for %i in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do if exist %i:\Scripts\Setup\CheckDefender.cmd (start /b cmd.exe /c %i:\Scripts\Setup\CheckDefender.cmd %i)"</Path>
 				</RunSynchronousCommand>
 			</RunSynchronous>
 		</component>
@@ -176,7 +176,7 @@
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>2</Order>
-					<Path>powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-PSDrive -PSProvider FileSystem | ForEach-Object { $path = Join-Path $_.Root 'ventoy\script\specialize_custom.ps1'; if (Test-Path $path) { &amp; $path $_.Root } }"</Path>
+					<Path>powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-PSDrive -PSProvider FileSystem | ForEach-Object { $path = Join-Path $_.Root 'Scripts\Setup\specialize_custom.ps1'; if (Test-Path $path) { &amp; $path $_.Root } }"</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>3</Order>
@@ -204,7 +204,7 @@
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>2</Order>
-					<Path>powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-PSDrive -PSProvider FileSystem | ForEach-Object { $path = Join-Path $_.Root 'ventoy\script\specialize_custom.ps1'; if (Test-Path $path) { &amp; $path $_.Root } }"</Path>
+					<Path>powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-PSDrive -PSProvider FileSystem | ForEach-Object { $path = Join-Path $_.Root 'Scripts\Setup\specialize_custom.ps1'; if (Test-Path $path) { &amp; $path $_.Root } }"</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>3</Order>
@@ -264,7 +264,7 @@
 				</SynchronousCommand>
 				<SynchronousCommand wcm:action="add">
 					<Order>2</Order>
-					<CommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-PSDrive -PSProvider FileSystem | ForEach-Object { $path = Join-Path $_.Root 'ventoy\script\first_logon.ps1'; if (Test-Path $path) { &amp; $path $_.Root } }"</CommandLine>
+					<CommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-PSDrive -PSProvider FileSystem | ForEach-Object { $path = Join-Path $_.Root 'Scripts\Setup\first_logon.ps1'; if (Test-Path $path) { &amp; $path $_.Root } }"</CommandLine>
 				</SynchronousCommand>
 			</FirstLogonCommands>
 		</component>
@@ -286,7 +286,7 @@
 				</SynchronousCommand>
 				<SynchronousCommand wcm:action="add">
 					<Order>2</Order>
-					<CommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-PSDrive -PSProvider FileSystem | ForEach-Object { $path = Join-Path $_.Root 'ventoy\script\first_logon.ps1'; if (Test-Path $path) { &amp; $path $_.Root } }"</CommandLine>
+					<CommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-PSDrive -PSProvider FileSystem | ForEach-Object { $path = Join-Path $_.Root 'Scripts\Setup\first_logon.ps1'; if (Test-Path $path) { &amp; $path $_.Root } }"</CommandLine>
 				</SynchronousCommand>
 			</FirstLogonCommands>
 		</component>

@@ -4,12 +4,12 @@ setlocal enabledelayedexpansion
 :: 1. Search the usb drive (by existing of the INI file)
 set "USB="
 for %%i in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
-    if exist "%%i:\ventoy\script\user_choices.ini" set "USB=%%i:"
+    if exist "%%i:\Scripts\Setup\user_choices.ini" set "USB=%%i:"
 )
 
 if not defined USB exit /b [cite: 9]
 
-set "INI=%USB%\ventoy\script\user_choices.ini"
+set "INI=%USB%\Scripts\Setup\user_choices.ini"
 set "DISABLE_DEF=false"
 
 :: 2. Read INI [cite: 12]

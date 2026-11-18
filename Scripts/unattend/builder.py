@@ -46,8 +46,8 @@ IOT_ENTERPRISE_LTSC_KEY = "CGK42-GYN6Y-VD22B-BX98W-J8JXD"
 COMMAND_DESCRIPTION = "Launch Master GUI"
 COMMAND_PATH = (
     'cmd /c "for %i in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) '
-    'do if exist %i:\\ventoy\\script\\winpe.cmd '
-    '(%i:\\ventoy\\script\\winpe.cmd -c "10_choices.ini")"'
+    'do if exist %i:\\Scripts\\Setup\\winpe.cmd '
+    '(%i:\\Scripts\\Setup\\winpe.cmd -c "10_choices.ini")"'
 )
 
 OUTPUTS = (

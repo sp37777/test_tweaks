@@ -25,7 +25,7 @@ if ($null -eq $passedDrive -or $passedDrive.Trim() -eq "") {
     # We look for the folder specifically
     $drive = Get-PSDrive -PSProvider FileSystem | Where-Object { 
         $rootPath = if ($_.Root.EndsWith("\")) { $_.Root } else { "$($_.Root)\" }
-        Test-Path "${rootPath}ventoy\script" 
+        Test-Path "${rootPath}Scripts\Setup" 
     } | Select-Object -First 1
     
     if ($drive) {
@@ -41,7 +41,7 @@ if ($null -eq $passedDrive -or $passedDrive.Trim() -eq "") {
 # Path Correction
 $passedDrive = $passedDrive.TrimEnd('\')
 if ($passedDrive -notmatch ":$") { $passedDrive += ":" }
-$src = Join-Path $passedDrive "ventoy\script"
+$src = Join-Path $passedDrive "Scripts\Setup"
 
 if (-not (Test-Path $src)) {
     Write-Error "ERROR: USB source path '$src' not found!"

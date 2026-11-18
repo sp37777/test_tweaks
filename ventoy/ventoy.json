@@ -14,29 +14,29 @@
         {
             "parent": "/Images/Windows/7",
             "template":[
-                "/ventoy/unattend/unattend_7.xml"
+                "/Scripts/unattend/unattend_7.xml"
             ]
         },
         {
             "parent": "/Images/Windows/81",
             "template":[
-                "/ventoy/unattend/unattend_81.xml"
+                "/Scripts/unattend/unattend_81.xml"
             ]
         },
         {
             "parent": "/Images/Windows/10_11",
             "template":[
-                "/ventoy/unattend/unattend_10_schneegans_enterprise.xml",
-                "/ventoy/unattend/unattend_10_schneegans",
-				"/ventoy/unattend/autounattend.xml"
+                "/Scripts/unattend/unattend_10_schneegans_enterprise.xml",
+                "/Scripts/unattend/unattend_10_schneegans",
+				"/Scripts/unattend/autounattend.xml"
             ]
         },
         {
             "parent": "/Images/Windows/ltsc",
             "template":[
-                "/ventoy/unattend/unattend_10_schneegans_LTSC_IoT.xml",
-                "/ventoy/unattend/unattend_10_schneegans.xml",
-				"/ventoy/unattend/autounattend.xml"
+                "/Scripts/unattend/unattend_10_schneegans_LTSC_IoT.xml",
+                "/Scripts/unattend/unattend_10_schneegans.xml",
+				"/Scripts/unattend/autounattend.xml"
             ]
         }
     ]
