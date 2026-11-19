@@ -26,16 +26,16 @@
         {
             "parent": "/Images/Windows/10_11",
             "template":[
-                "/Scripts/unattend/unattend_10_schneegans_enterprise.xml",
-                "/Scripts/unattend/unattend_10_schneegans",
+                "/Scripts/unattend/unattend_10_enterprise_key",
+                "/Scripts/unattend/unattend_10_enterprise_key",
 				"/Scripts/unattend/autounattend.xml"
             ]
         },
         {
             "parent": "/Images/Windows/ltsc",
             "template":[
-                "/Scripts/unattend/unattend_10_schneegans_LTSC_IoT.xml",
-                "/Scripts/unattend/unattend_10_schneegans.xml",
+                "/Scripts/unattend/unattend_10_LTSC_IoT_key.xml",
+                "/Scripts/unattend/unattend_10_enterprise_key.xml",
 				"/Scripts/unattend/autounattend.xml"
             ]
         }
