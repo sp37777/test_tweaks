@@ -113,6 +113,20 @@ try {
             }
         }
     }
+    
+    $tweakerPath = Join-Path $PSScriptRoot 'tweaker.ps1'
+
+    $arguments = '-NoProfile -ExecutionPolicy Bypass -File "{0}"' -f $tweakerPath
+
+    $process = Start-Process `
+        -FilePath "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" `
+        -ArgumentList $arguments `
+        -Wait `
+        -PassThru
+
+    if ($process.ExitCode -ne 0) {
+        throw "Tweaker failed with exit code $($process.ExitCode)"
+    }
 }
 finally {
     # 4. Clean up - This block runs regardless of success or failure above

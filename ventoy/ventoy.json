@@ -26,8 +26,8 @@
         {
             "parent": "/Images/Windows/10_11",
             "template":[
-                "/Scripts/unattend/unattend_10_enterprise_key",
-                "/Scripts/unattend/unattend_10_enterprise_key",
+                "/Scripts/unattend/unattend_10_enterprise_key.xml",
+                "/Scripts/unattend/unattend_10_no_key.xml",
 				"/Scripts/unattend/autounattend.xml"
             ]
         },
@@ -36,6 +36,7 @@
             "template":[
                 "/Scripts/unattend/unattend_10_LTSC_IoT_key.xml",
                 "/Scripts/unattend/unattend_10_enterprise_key.xml",
+                "/Scripts/unattend/unattend_10_no_key.xml",
 				"/Scripts/unattend/autounattend.xml"
             ]
         }
