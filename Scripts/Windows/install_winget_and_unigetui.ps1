@@ -30,19 +30,44 @@ if ($null -eq $wingetModule) {
     Write-Host "WinGet module is already installed." -ForegroundColor Green
 }
 
-# 3. Attempt WinGet Repair (only if version is old or missing)
+# 3. Repair WinGet and wait until it becomes available
 try {
-    # This command is fast if already current, but we wrap it to be safe
-    Repair-WinGetPackageManager -Force -Latest -ErrorAction SilentlyContinue
-} catch {}
+    Repair-WinGetPackageManager -Force -Latest -ErrorAction Stop
+
+    $wingetReady = $false
+    for ($i = 0; $i -lt 10; $i++) {
+        winget --version *> $null
+        if ($LASTEXITCODE -eq 0) {
+            $wingetReady = $true
+            break
+        }
+        Start-Sleep -Seconds 2
+    }
+
+    if (-not $wingetReady) {
+        throw "WinGet is not responding after repair."
+    }
+} catch {
+    Write-Host "WinGet repair/check failed: $_" -ForegroundColor Red
+    throw
+}
 
 # 4. Check if UniGetUI is already installed
-$checkUI = winget list --id Devolutions.UniGetUI -e --accept-source-agreements
-if ($null -eq $checkUI -or $checkUI.Count -lt 3) {
-    Write-Host "UniGetUI not found. Installing..." -ForegroundColor Cyan
-    winget install --exact --id Devolutions.UniGetUI --source winget --accept-package-agreements --accept-source-agreements --override "/NoRunOnStartup /NoAutoStart /VERYSILENT /CURRENTUSER"
-} else {
+$packageId = "Devolutions.UniGetUI"
+
+$checkUI = winget list --id $packageId --exact --accept-source-agreements --disable-interactivity 2>&1 | Out-String
+
+# Look for the exact package ID in the results, not the number of output lines
+if ($checkUI -match "(?im)^\s*.*\bDevolutions\.UniGetUI\b.*$") {
     Write-Host "UniGetUI is already installed. Skipping installation..." -ForegroundColor Green
+} else {
+    Write-Host "UniGetUI not found. Installing..." -ForegroundColor Cyan
+
+    winget install --exact --id $packageId --source winget --accept-package-agreements --accept-source-agreements --override "/NoRunOnStartup /NoAutoStart /VERYSILENT /CURRENTUSER"
+
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "UniGetUI installation failed. Exit code: $LASTEXITCODE" -ForegroundColor Red
+    }
 }
 
 Write-Host "`n--- Setup Complete ---" -ForegroundColor Green

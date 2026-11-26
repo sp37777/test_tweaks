@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
-	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=uk-UA&Locale=uk-UA&Keyboard=00000422&GeoLocation=241&PEMode=Default&WindowsEditionMode=Firmware&BypassRequirementsCheck=true&ProcessorArchitecture=x86&ProcessorArchitecture=amd64&BypassNetworkCheck=true&ComputerNameMode=Random&TimeZoneMode=Explicit&TimeZone=FLE+Standard+Time&UserAccountMode=InteractiveLocal&PasswordExpirationMode=Unlimited&LockoutMode=Default&HideFiles=Hidden&ShowFileExtensions=true&ClassicContextMenu=true&LaunchToThisPC=true&ShowEndTask=true&TaskbarSearch=Icon&TaskbarIconsMode=Custom&TaskbarIconsXml=%3CLayoutModificationTemplate+xmlns%3Adefaultlayout%3D%22http%3A%2F%2Fschemas.microsoft.com%2FStart%2F2014%2FFullDefaultLayout%22+xmlns%3Astart%3D%22http%3A%2F%2Fschemas.microsoft.com%2FStart%2F2014%2FStartLayout%22+Version%3D%221%22+xmlns%3Ataskbar%3D%22http%3A%2F%2Fschemas.microsoft.com%2FStart%2F2014%2FTaskbarLayout%22+xmlns%3D%22http%3A%2F%2Fschemas.microsoft.com%2FStart%2F2014%2FLayoutModification%22%3E%0D%0A++%3CCustomTaskbarLayoutCollection+PinListPlacement%3D%22Replace%22%3E%0D%0A++++%3Cdefaultlayout%3ATaskbarLayout%3E%0D%0A++++++%3Ctaskbar%3ATaskbarPinList%3E%0D%0A++++++++%3Ctaskbar%3ADesktopApp+DesktopApplicationID%3D%22Microsoft.Windows.Explorer%22+%2F%3E%0D%0A++++++%3C%2Ftaskbar%3ATaskbarPinList%3E%0D%0A++++%3C%2Fdefaultlayout%3ATaskbarLayout%3E%0D%0A++%3C%2FCustomTaskbarLayoutCollection%3E%0D%0A%3C%2FLayoutModificationTemplate%3E&DisableWidgets=true&LeftTaskbar=true&HideTaskViewButton=true&ShowAllTrayIcons=true&DisableBingResults=true&StartTilesMode=Custom&StartTilesXml=%3CLayoutModificationTemplate+xmlns%3Adefaultlayout%3D%22http%3A%2F%2Fschemas.microsoft.com%2FStart%2F2014%2FFullDefaultLayout%22+xmlns%3Astart%3D%22http%3A%2F%2Fschemas.microsoft.com%2FStart%2F2014%2FStartLayout%22+Version%3D%221%22+xmlns%3Ataskbar%3D%22http%3A%2F%2Fschemas.microsoft.com%2FStart%2F2014%2FTaskbarLayout%22+xmlns%3D%22http%3A%2F%2Fschemas.microsoft.com%2FStart%2F2014%2FLayoutModification%22%3E%0D%0A++%3CDefaultLayoutOverride%3E%0D%0A++++%3CStartLayoutCollection%3E%0D%0A++++++%3Cdefaultlayout%3AStartLayout+GroupCellWidth%3D%226%22%3E%0D%0A++++++++%3Cstart%3AGroup+Name%3D%22Tools%22%3E%0D%0A+++++++++++%3Cstart%3ADesktopApplicationTile+Size%3D%222x2%22+Column%3D%220%22+Row%3D%220%22+DesktopApplicationLinkPath%3D%22%25ALLUSERSPROFILE%25%5CMicrosoft%5CWindows%5CStart+Menu%5CPrograms%5CSystem+Tools%5CCommand+Prompt.lnk%22+%2F%3E%0D%0A+++++++++++%3Cstart%3ADesktopApplicationTile+Size%3D%222x2%22+Column%3D%222%22+Row%3D%220%22+DesktopApplicationLinkPath%3D%22%25ALLUSERSPROFILE%25%5CMicrosoft%5CWindows%5CStart+Menu%5CPrograms%5CWindows+PowerShell%5CWindows+PowerShell.lnk%22+%2F%3E%0D%0A++++++++%3C%2Fstart%3AGroup%3E%0D%0A++++++%3C%2Fdefaultlayout%3AStartLayout%3E%0D%0A++++%3C%2FStartLayoutCollection%3E%0D%0A++%3C%2FDefaultLayoutOverride%3E%0D%0A%3C%2FLayoutModificationTemplate%3E&StartPinsMode=Custom&StartPinsJson=%7B%0D%0A++%22pinnedList%22%3A+%5B%0D%0A%09%7B+%22packagedAppId%22%3A+%22windows.immersivecontrolpanel_cw5n1h2txyewy%21microsoft.windows.immersivecontrolpanel%22+%7D%2C%0D%0A%09%7B+%22desktopAppLink%22%3A+%22%25APPDATA%25%5C%5CMicrosoft%5C%5CWindows%5C%5CStart+Menu%5C%5CPrograms%5C%5CWindows+PowerShell%5C%5CWindows+PowerShell.lnk%22+%7D%2C%0D%0A%09%7B+%22desktopAppLink%22%3A+%22%25APPDATA%25%5C%5CMicrosoft%5C%5CWindows%5C%5CStart+Menu%5C%5CPrograms%5C%5CWindows+PowerShell%5C%5CWindows+PowerShell+%28x86%29.lnk%22+%7D%2C%0D%0A%09%7B+%22desktopAppLink%22%3A+%22%25APPDATA%25%5C%5CMicrosoft%5C%5CWindows%5C%5CStart+Menu%5C%5CPrograms%5C%5CSystem+Tools%5C%5CCommand+Prompt.lnk%22+%7D%2C%0D%0A%09%7B+%22desktopAppLink%22%3A+%22%25APPDATA%25%5C%5CMicrosoft%5C%5CWindows%5C%5CStart+Menu%5C%5CPrograms%5C%5CSystem+Tools%5C%5CControl+Panel.lnk%22+%7D%2C%0D%0A++++%7B+%22desktopAppLink%22%3A+%22%25APPDATA%25%5C%5CMicrosoft%5C%5CWindows%5C%5CStart+Menu%5C%5CPrograms%5C%5CSystem+Tools%5C%5CRun.lnk%22+%7D%0D%0A++%5D%0D%0A%7D&DisableSac=true&DeleteJunctions=true&DisableAppSuggestions=true&HideEdgeFre=true&DisableEdgeStartupBoost=true&MakeEdgeUninstallable=true&DeleteWindowsOld=true&EffectsMode=Default&DeleteEdgeDesktopIcon=true&DesktopIconsMode=Custom&IconRecycleBin=true&IconThisPC=true&StartFoldersMode=Default&CoreIsolationMode=Enabled&WifiMode=Skip&ExpressSettings=DisableAll&LockKeysMode=Skip&StickyKeysMode=Default&ColorMode=Default&WallpaperMode=Default&LockScreenMode=Default&Remove3DViewer=true&RemoveBingSearch=true&RemoveClipchamp=true&RemoveCopilot=true&RemoveCortana=true&RemoveDevHome=true&RemoveFamily=true&RemoveFeedbackHub=true&RemoveGameAssist=true&RemoveGetHelp=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveMaps=true&RemoveMixedReality=true&RemoveZuneVideo=true&RemoveNews=true&RemoveOffice365=true&RemoveOneSync=true&RemovePaint3D=true&RemovePeople=true&RemovePowerAutomate=true&RemovePowerShell2=true&RemoveRecall=true&RemoveSkype=true&RemoveSolitaire=true&RemoveStepsRecorder=true&RemoveTeams=true&RemoveGetStarted=true&RemoveWallet=true&RemoveWeather=true&RemoveWindowsMediaPlayer=true&RemoveXboxApps=true&SystemScript0=%24VentoyScript+%3D+Get-PSDrive+-PSProvider+FileSystem+%7C%0D%0A++++ForEach-Object+%7B+Join-Path+%24_.Root+%27ventoy%5Cscript%5Cspecialize_custom.ps1%27+%7D+%7C%0D%0A++++Where-Object+%7B+Test-Path+-LiteralPath+%24_+%7D+%7C%0D%0A++++Select-Object+-First+1%0D%0A%0D%0Aif+%28%24VentoyScript%29+%7B%0D%0A++++%26+%24VentoyScript%0D%0A%7D+else+%7B%0D%0A++++throw+%27specialize_custom.ps1+not+found+on+Ventoy+drive%27%0D%0A%7D&SystemScriptType0=Ps1&FirstLogonScript0=%24VentoyScript+%3D+Get-PSDrive+-PSProvider+FileSystem+%7C%0D%0A++++ForEach-Object+%7B+Join-Path+%24_.Root+%27ventoy%5Cscript%5Cfirst_logon.ps1%27+%7D+%7C%0D%0A++++Where-Object+%7B+Test-Path+-LiteralPath+%24_+%7D+%7C%0D%0A++++Select-Object+-First+1%0D%0A%0D%0Aif+%28%24VentoyScript%29+%7B%0D%0A++++%26+%24VentoyScript%0D%0A%7D+else+%7B%0D%0A++++throw+%27specialize_custom.ps1+not+found+on+Ventoy+drive%27%0D%0A%7D&FirstLogonScriptType0=Ps1&AppLockerMode=Skip-->
+	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=uk-UA&Locale=uk-UA&Keyboard=00000422&GeoLocation=241&PEMode=Default&WindowsEditionMode=Firmware&BypassRequirementsCheck=true&ProcessorArchitecture=x86&ProcessorArchitecture=amd64&BypassNetworkCheck=true&ComputerNameMode=Random&TimeZoneMode=Explicit&TimeZone=FLE+Standard+Time&UserAccountMode=InteractiveLocal&PasswordExpirationMode=Unlimited&LockoutMode=Default&HideFiles=Hidden&ShowFileExtensions=true&ClassicContextMenu=true&LaunchToThisPC=true&ShowEndTask=true&TaskbarSearch=Icon&TaskbarIconsMode=Custom&TaskbarIconsXml=%3CLayoutModificationTemplate+xmlns%3Adefaultlayout%3D%22http%3A%2F%2Fschemas.microsoft.com%2FStart%2F2014%2FFullDefaultLayout%22+xmlns%3Astart%3D%22http%3A%2F%2Fschemas.microsoft.com%2FStart%2F2014%2FStartLayout%22+Version%3D%221%22+xmlns%3Ataskbar%3D%22http%3A%2F%2Fschemas.microsoft.com%2FStart%2F2014%2FTaskbarLayout%22+xmlns%3D%22http%3A%2F%2Fschemas.microsoft.com%2FStart%2F2014%2FLayoutModification%22%3E%0D%0A++%3CCustomTaskbarLayoutCollection+PinListPlacement%3D%22Replace%22%3E%0D%0A++++%3Cdefaultlayout%3ATaskbarLayout%3E%0D%0A++++++%3Ctaskbar%3ATaskbarPinList%3E%0D%0A++++++++%3Ctaskbar%3ADesktopApp+DesktopApplicationID%3D%22Microsoft.Windows.Explorer%22+%2F%3E%0D%0A++++++%3C%2Ftaskbar%3ATaskbarPinList%3E%0D%0A++++%3C%2Fdefaultlayout%3ATaskbarLayout%3E%0D%0A++%3C%2FCustomTaskbarLayoutCollection%3E%0D%0A%3C%2FLayoutModificationTemplate%3E&DisableWidgets=true&LeftTaskbar=true&HideTaskViewButton=true&ShowAllTrayIcons=true&DisableBingResults=true&StartTilesMode=Custom&StartTilesXml=%3CLayoutModificationTemplate+xmlns%3Adefaultlayout%3D%22http%3A%2F%2Fschemas.microsoft.com%2FStart%2F2014%2FFullDefaultLayout%22+xmlns%3Astart%3D%22http%3A%2F%2Fschemas.microsoft.com%2FStart%2F2014%2FStartLayout%22+Version%3D%221%22+xmlns%3Ataskbar%3D%22http%3A%2F%2Fschemas.microsoft.com%2FStart%2F2014%2FTaskbarLayout%22+xmlns%3D%22http%3A%2F%2Fschemas.microsoft.com%2FStart%2F2014%2FLayoutModification%22%3E%0D%0A++%3CDefaultLayoutOverride%3E%0D%0A++++%3CStartLayoutCollection%3E%0D%0A++++++%3Cdefaultlayout%3AStartLayout+GroupCellWidth%3D%226%22%3E%0D%0A++++++++%3Cstart%3AGroup+Name%3D%22Tools%22%3E%0D%0A+++++++++++%3Cstart%3ADesktopApplicationTile+Size%3D%222x2%22+Column%3D%220%22+Row%3D%220%22+DesktopApplicationLinkPath%3D%22%25ALLUSERSPROFILE%25%5CMicrosoft%5CWindows%5CStart+Menu%5CPrograms%5CSystem+Tools%5CCommand+Prompt.lnk%22+%2F%3E%0D%0A+++++++++++%3Cstart%3ADesktopApplicationTile+Size%3D%222x2%22+Column%3D%222%22+Row%3D%220%22+DesktopApplicationLinkPath%3D%22%25ALLUSERSPROFILE%25%5CMicrosoft%5CWindows%5CStart+Menu%5CPrograms%5CWindows+PowerShell%5CWindows+PowerShell.lnk%22+%2F%3E%0D%0A++++++++%3C%2Fstart%3AGroup%3E%0D%0A++++++%3C%2Fdefaultlayout%3AStartLayout%3E%0D%0A++++%3C%2FStartLayoutCollection%3E%0D%0A++%3C%2FDefaultLayoutOverride%3E%0D%0A%3C%2FLayoutModificationTemplate%3E&StartPinsMode=Custom&StartPinsJson=%7B%0D%0A++%22pinnedList%22%3A+%5B%0D%0A%09%7B+%22packagedAppId%22%3A+%22windows.immersivecontrolpanel_cw5n1h2txyewy%21microsoft.windows.immersivecontrolpanel%22+%7D%2C%0D%0A%09%7B+%22desktopAppLink%22%3A+%22%25APPDATA%25%5C%5CMicrosoft%5C%5CWindows%5C%5CStart+Menu%5C%5CPrograms%5C%5CWindows+PowerShell%5C%5CWindows+PowerShell.lnk%22+%7D%2C%0D%0A%09%7B+%22desktopAppLink%22%3A+%22%25APPDATA%25%5C%5CMicrosoft%5C%5CWindows%5C%5CStart+Menu%5C%5CPrograms%5C%5CWindows+PowerShell%5C%5CWindows+PowerShell+%28x86%29.lnk%22+%7D%2C%0D%0A%09%7B+%22desktopAppLink%22%3A+%22%25APPDATA%25%5C%5CMicrosoft%5C%5CWindows%5C%5CStart+Menu%5C%5CPrograms%5C%5CSystem+Tools%5C%5CCommand+Prompt.lnk%22+%7D%2C%0D%0A%09%7B+%22desktopAppLink%22%3A+%22%25APPDATA%25%5C%5CMicrosoft%5C%5CWindows%5C%5CStart+Menu%5C%5CPrograms%5C%5CSystem+Tools%5C%5CControl+Panel.lnk%22+%7D%2C%0D%0A++++%7B+%22desktopAppLink%22%3A+%22%25APPDATA%25%5C%5CMicrosoft%5C%5CWindows%5C%5CStart+Menu%5C%5CPrograms%5C%5CSystem+Tools%5C%5CRun.lnk%22+%7D%0D%0A++%5D%0D%0A%7D&DisableSac=true&DeleteJunctions=true&DisableAppSuggestions=true&HideEdgeFre=true&DisableEdgeStartupBoost=true&MakeEdgeUninstallable=true&DeleteWindowsOld=true&EffectsMode=Default&DeleteEdgeDesktopIcon=true&DesktopIconsMode=Custom&IconRecycleBin=true&IconThisPC=true&StartFoldersMode=Default&CoreIsolationMode=Enabled&WifiMode=Skip&ExpressSettings=DisableAll&LockKeysMode=Skip&StickyKeysMode=Default&ColorMode=Default&WallpaperMode=Default&LockScreenMode=Default&Remove3DViewer=true&RemoveBingSearch=true&RemoveClipchamp=true&RemoveCopilot=true&RemoveCortana=true&RemoveDevHome=true&RemoveFamily=true&RemoveFeedbackHub=true&RemoveGameAssist=true&RemoveGetHelp=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveMaps=true&RemoveMixedReality=true&RemoveZuneVideo=true&RemoveNews=true&RemoveOffice365=true&RemoveOneSync=true&RemovePaint3D=true&RemovePeople=true&RemovePowerAutomate=true&RemovePowerShell2=true&RemoveRecall=true&RemoveSkype=true&RemoveSolitaire=true&RemoveStepsRecorder=true&RemoveTeams=true&RemoveGetStarted=true&RemoveWallet=true&RemoveWeather=true&RemoveWindowsMediaPlayer=true&RemoveXboxApps=true&SystemScript0=%0D%0A%24ErrorActionPreference+%3D+%27Stop%27%0D%0A%0D%0Atry+%7B%0D%0A++++Write-Host+%22%60nSearching+for+specialize_custom.ps1...%22+-ForegroundColor+Cyan%0D%0A%0D%0A++++%24VentoyScript+%3D+Get-PSDrive+-PSProvider+FileSystem+%7C%0D%0A++++++++ForEach-Object+%7B%0D%0A++++++++++++Join-Path+%24_.Root+%27ventoy%5Cscript%5Cspecialize_custom.ps1%27%0D%0A++++++++%7D+%7C%0D%0A++++++++Where-Object+%7B%0D%0A++++++++++++Test-Path+-LiteralPath+%24_+-PathType+Leaf%0D%0A++++++++%7D+%7C%0D%0A++++++++Select-Object+-First+1%0D%0A%0D%0A++++if+%28-not+%24VentoyScript%29+%7B%0D%0A++++++++throw+%27specialize_custom.ps1+not+found+on+Ventoy+drive%27%0D%0A++++%7D%0D%0A%0D%0A++++Write-Host+%22Found%3A+%24VentoyScript%22+-ForegroundColor+Green%0D%0A++++Write-Host+%22%60nExecuting+script...%60n%22+-ForegroundColor+Cyan%0D%0A%0D%0A++++%26+%24VentoyScript%0D%0A%0D%0A++++Write-Host+%22%60nScript+finished+successfully.%22+-ForegroundColor+Green%0D%0A%7D%0D%0Acatch+%7B%0D%0A++++Write-Host+%22%60nERROR%21%22+-ForegroundColor+Red%0D%0A++++Write-Host+%24_.Exception.Message+-ForegroundColor+Red%0D%0A%0D%0A++++if+%28%24_.ScriptStackTrace%29+%7B%0D%0A++++++++Write-Host+%22%60nStack+trace%3A%22+-ForegroundColor+Yellow%0D%0A++++++++Write-Host+%24_.ScriptStackTrace%0D%0A++++%7D%0D%0A%0D%0A++++Write-Host+%22%60nFull+error+details%3A%22+-ForegroundColor+Yellow%0D%0A++++Write-Host+%28%24_+%7C+Format-List+*+-Force+%7C+Out-String%29%0D%0A%7D%0D%0Afinally+%7B%0D%0A++++Write-Host+%22%60n%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%2D%22%0D%0A++++Write-Host+%22Press+ENTER+to+close+%2830+seconds+timeout%29.%22+-ForegroundColor+Yellow%0D%0A%0D%0A++++try+%7B%0D%0A++++++++if+%28-not+%5BConsole%5D%3A%3AIsInputRedirected%29+%7B%0D%0A++++++++++++%24Timer+%3D+%5BDiagnostics.Stopwatch%5D%3A%3AStartNew%28%29%0D%0A%0D%0A++++++++++++while+%28%24Timer.Elapsed.TotalSeconds+-lt+30%29+%7B%0D%0A++++++++++++++++if+%28%5BConsole%5D%3A%3AKeyAvailable%29+%7B%0D%0A++++++++++++++++++++%24Key+%3D+%5BConsole%5D%3A%3AReadKey%28%24true%29%0D%0A%0D%0A++++++++++++++++++++if+%28%24Key.Key+-eq+%5BConsoleKey%5D%3A%3AEnter%29+%7B%0D%0A++++++++++++++++++++++++break%0D%0A++++++++++++++++++++%7D%0D%0A++++++++++++++++%7D%0D%0A%0D%0A++++++++++++++++Start-Sleep+-Milliseconds+100%0D%0A++++++++++++%7D%0D%0A%0D%0A++++++++++++%24Timer.Stop%28%29%0D%0A++++++++%7D%0D%0A++++%7D%0D%0A++++catch+%7B%0D%0A++++++++Write-Host+%22Console+input+unavailable%3B+closing.%22%0D%0A++++%7D%0D%0A%7D%0D%0A&SystemScriptType0=Ps1&FirstLogonScript0=%24VentoyScript+%3D+Get-PSDrive+-PSProvider+FileSystem+%7C%0D%0A++++ForEach-Object+%7B+Join-Path+%24_.Root+%27ventoy%5Cscript%5Cfirst_logon.ps1%27+%7D+%7C%0D%0A++++Where-Object+%7B+Test-Path+-LiteralPath+%24_+%7D+%7C%0D%0A++++Select-Object+-First+1%0D%0A%0D%0Aif+%28%24VentoyScript%29+%7B%0D%0A++++%26+%24VentoyScript%0D%0A%7D+else+%7B%0D%0A++++throw+%27specialize_custom.ps1+not+found+on+Ventoy+drive%27%0D%0A%7D&FirstLogonScriptType0=Ps1&AppLockerMode=Skip-->
 	<settings pass="offlineServicing"></settings>
 	<settings pass="windowsPE">
 		<component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="x86" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
@@ -170,8 +170,8 @@
 	<Extensions xmlns="https://schneegans.de/windows/unattend-generator/">
 		<Build>
 			<Commit>
-				<Hash>8fdf1b99af95977ea38f4922662964dc6324b0df</Hash>
-				<GitHubUrl>https://github.com/cschneegans/unattend-generator/commit/8fdf1b99af95977ea38f4922662964dc6324b0df</GitHubUrl>
+				<Hash>a21ef3a5e9ff9e0d75e297895d2700b256aa3ca8</Hash>
+				<GitHubUrl>https://github.com/cschneegans/unattend-generator/commit/a21ef3a5e9ff9e0d75e297895d2700b256aa3ca8</GitHubUrl>
 			</Commit>
 		</Build>
 		<ExtractScript>
@@ -516,15 +516,69 @@ Set-ItemProperty -LiteralPath $key -Name 'ConfigureStartPins' -Value $json -Type
 &lt;/LayoutModificationTemplate&gt;
 		</File>
 		<File path="C:\Windows\Setup\Scripts\unattend-01.ps1">
-$VentoyScript = Get-PSDrive -PSProvider FileSystem |
-    ForEach-Object { Join-Path $_.Root 'ventoy\script\specialize_custom.ps1' } |
-    Where-Object { Test-Path -LiteralPath $_ } |
-    Select-Object -First 1
+$ErrorActionPreference = 'Stop'
 
-if ($VentoyScript) {
+try {
+    Write-Host "`nSearching for specialize_custom.ps1..." -ForegroundColor Cyan
+
+    $VentoyScript = Get-PSDrive -PSProvider FileSystem |
+        ForEach-Object {
+            Join-Path $_.Root 'Scripts\Setup\specialize_custom.ps1'
+        } |
+        Where-Object {
+            Test-Path -LiteralPath $_ -PathType Leaf
+        } |
+        Select-Object -First 1
+
+    if (-not $VentoyScript) {
+        throw 'specialize_custom.ps1 not found on Ventoy drive'
+    }
+
+    Write-Host "Found: $VentoyScript" -ForegroundColor Green
+    Write-Host "`nExecuting script...`n" -ForegroundColor Cyan
+
     &amp; $VentoyScript
-} else {
-    throw 'specialize_custom.ps1 not found on Ventoy drive'
+
+    Write-Host "`nScript finished successfully." -ForegroundColor Green
+}
+catch {
+    Write-Host "`nERROR!" -ForegroundColor Red
+    Write-Host $_.Exception.Message -ForegroundColor Red
+
+    if ($_.ScriptStackTrace) {
+        Write-Host "`nStack trace:" -ForegroundColor Yellow
+        Write-Host $_.ScriptStackTrace
+    }
+
+    Write-Host "`nFull error details:" -ForegroundColor Yellow
+    Write-Host ($_ | Format-List * -Force | Out-String)
+}
+finally {
+    Write-Host "`n----------------------------------------"
+    Write-Host "Press ENTER to close (30 seconds timeout)." -ForegroundColor Yellow
+
+    try {
+        if (-not [Console]::IsInputRedirected) {
+            $Timer = [Diagnostics.Stopwatch]::StartNew()
+
+            while ($Timer.Elapsed.TotalSeconds -lt 30) {
+                if ([Console]::KeyAvailable) {
+                    $Key = [Console]::ReadKey($true)
+
+                    if ($Key.Key -eq [ConsoleKey]::Enter) {
+                        break
+                    }
+                }
+
+                Start-Sleep -Milliseconds 100
+            }
+
+            $Timer.Stop()
+        }
+    }
+    catch {
+        Write-Host "Console input unavailable; closing."
+    }
 }
 		</File>
 		<File path="C:\Windows\Setup\Scripts\unattend-02.ps1">
