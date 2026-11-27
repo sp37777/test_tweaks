@@ -18,11 +18,20 @@ set "SCRIPT_DIR=%~dp0"
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (set "ARCH=64") else (set "ARCH=86")
 set "APP_PATH=%SCRIPT_DIR%tweak_chooser_x%ARCH%.exe"
 
-:: 5. Launch with ALL passed parameters
-if exist "%APP_PATH%" (
-    echo Launching with params: %*
-    "%APP_PATH%" %*
-) else (
+:: 5. Launch
+if not exist "%APP_PATH%" (
     echo ERROR: App not found at %APP_PATH%
     pause
+    exit /b 1
 )
+
+:: a stale result from a previous run must never be applied
+del /q "%SCRIPT_DIR%user_choices.json" "%SCRIPT_DIR%user_choices.json.tmp" 2>nul
+
+:: default template, unless the caller passed its own parameters
+set "APP_ARGS=%*"
+if not defined APP_ARGS set "APP_ARGS=-c "%SCRIPT_DIR%10_choices.json""
+
+echo Launching with params: %APP_ARGS%
+start "" /wait "%APP_PATH%" %APP_ARGS%
+echo tweak_chooser exit code: %errorlevel%
