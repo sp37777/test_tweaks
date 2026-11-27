@@ -1,0 +1,24 @@
+{
+  "catalog": "removables.json",
+  "groups": [
+    {
+      "title": "Identity",
+      "items": [
+        { "key": "UserName", "type": "text", "label": "User name", "default": "User" }
+      ]
+    },
+    {
+      "title": "Tweaks",
+      "items": [
+        { "key": "PreventUpdateReboot", "type": "bool", "label": "Prevent Windows Update auto-reboot", "default": false },
+        { "key": "DisableWpbt", "type": "bool", "label": "Disable WPBT execution (BIOS software injection)", "default": true },
+        { "key": "PreventDeviceApps", "type": "bool", "label": "Prevent hardware device apps auto-install", "default": true },
+        { "key": "DisableCoInstallers", "type": "bool", "label": "Disable driver co-installers (may affect old drivers)", "default": true },
+        { "key": "PreventDeviceEncryption", "type": "bool", "label": "Prevent device encryption", "default": false },
+        { "key": "DisableIndexing", "type": "bool", "label": "Disable file search indexing", "default": false },
+        { "key": "BestPerformanceVisuals", "type": "bool", "label": "Best performance visual effects", "default": false },
+        { "key": "DisableTransparency", "type": "bool", "label": "Disable transparency effects", "default": false }
+      ]
+    }
+  ]
+}
