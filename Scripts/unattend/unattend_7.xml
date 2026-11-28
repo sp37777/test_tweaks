@@ -36,7 +36,7 @@
                 <RunSynchronousCommand wcm:action="add">
                     <Order>1</Order>
                     <Description>Launch Master GUI</Description>
-					<Path>cmd /c "for %i in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do if exist %i:\Scripts\Setup\winpe.cmd (%i:\Scripts\Setup\winpe.cmd -c "7_choices.ini")"</Path>
+					<Path>cmd /c "for %i in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do if exist %i:\Scripts\Setup\winpe.cmd (%i:\Scripts\Setup\winpe.cmd -c "7_choices.json")"</Path>
                 </RunSynchronousCommand>
             </RunSynchronous>
         </component>
@@ -55,7 +55,7 @@
                 <RunSynchronousCommand wcm:action="add">
                     <Order>1</Order>
                     <Description>Launch Master GUI</Description>
-					<Path>cmd /c "for %i in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do if exist %i:\Scripts\Setup\winpe.cmd (%i:\Scripts\Setup\winpe.cmd -c "7_choices.ini")"</Path>
+					<Path>cmd /c "for %i in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do if exist %i:\Scripts\Setup\winpe.cmd (%i:\Scripts\Setup\winpe.cmd -c "7_choices.json")"</Path>
                 </RunSynchronousCommand>
             </RunSynchronous>
         </component>

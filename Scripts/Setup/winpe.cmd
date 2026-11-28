@@ -25,13 +25,10 @@ if not exist "%APP_PATH%" (
     exit /b 1
 )
 
-:: a stale result from a previous run must never be applied
-del /q "%SCRIPT_DIR%user_choices.json" "%SCRIPT_DIR%user_choices.json.tmp" 2>nul
+set "CHOICES_OUT=%SCRIPT_DIR%user_choices.json"
+del /q "%CHOICES_OUT%" "%CHOICES_OUT%.tmp" 2>nul
 
-:: default template, unless the caller passed its own parameters
 set "APP_ARGS=%*"
-if not defined APP_ARGS set "APP_ARGS=-c "%SCRIPT_DIR%10_choices.json""
+if not defined APP_ARGS set "APP_ARGS=-c "%SCRIPT_DIR%10_choices.json" -o "%CHOICES_OUT%""
 
-echo Launching with params: %APP_ARGS%
 start "" /wait "%APP_PATH%" %APP_ARGS%
-echo tweak_chooser exit code: %errorlevel%

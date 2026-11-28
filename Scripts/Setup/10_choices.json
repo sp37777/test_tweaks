@@ -20,7 +20,8 @@
         { "key": "DisableTransparency", "type": "bool", "label": "Disable transparency effects", "default": false },
         { "key": "DisableSilentApps", "type": "bool", "label": "Disable Silent Apps", "default": false },
         { "key": "DisableAppraiser", "type": "bool", "label": "Disable Appraiser", "default": false },
-        { "key": "DisableTelemetry", "type": "bool", "label": "Disable Telemetry", "default": false }
+        { "key": "DisableTelemetry", "type": "bool", "label": "Disable Telemetry", "default": false },
+        { "key": "RealTimeIsUniversal", "type": "bool", "label": "Set Real Time (BIOS time) to Universal", "default": false }
       ]
     }
   ]
