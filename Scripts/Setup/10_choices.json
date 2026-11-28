@@ -17,7 +17,10 @@
         { "key": "PreventDeviceEncryption", "type": "bool", "label": "Prevent device encryption", "default": false },
         { "key": "DisableIndexing", "type": "bool", "label": "Disable file search indexing", "default": false },
         { "key": "BestPerformanceVisuals", "type": "bool", "label": "Best performance visual effects", "default": false },
-        { "key": "DisableTransparency", "type": "bool", "label": "Disable transparency effects", "default": false }
+        { "key": "DisableTransparency", "type": "bool", "label": "Disable transparency effects", "default": false },
+        { "key": "DisableSilentApps", "type": "bool", "label": "Disable Silent Apps", "default": false },
+        { "key": "DisableAppraiser", "type": "bool", "label": "Disable Appraiser", "default": false },
+        { "key": "DisableTelemetry", "type": "bool", "label": "Disable Telemetry", "default": false }
       ]
     }
   ]

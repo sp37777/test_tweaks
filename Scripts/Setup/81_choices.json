@@ -1,0 +1,19 @@
+{
+  "catalog": "removables.json",
+  "groups": [
+    {
+      "title": "Identity",
+      "items": [
+        { "key": "UserName", "type": "text", "label": "User name", "default": "User" }
+      ]
+    },
+    {
+      "title": "Tweaks",
+      "items": [
+        { "key": "DisableSuperfetch", "type": "bool", "label": "Disable Superfetch service", "default": false },
+        { "key": "DisableScheduledDefrag", "type": "bool", "label": "Disable Scheduled Disk Defragmentation", "default": false },
+        { "key": "RealTimeIsUniversal", "type": "bool", "label": "Set Real Time (BIOS time) to Universal", "default": false }
+      ]
+    }
+  ]
+}

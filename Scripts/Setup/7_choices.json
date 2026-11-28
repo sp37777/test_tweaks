@@ -1,0 +1,18 @@
+{
+  "catalog": "removables.json",
+  "groups": [
+    {
+      "title": "Identity",
+      "items": [
+        { "key": "UserName", "type": "text", "label": "User name", "default": "User" }
+      ]
+    },
+    {
+      "title": "Tweaks",
+      "items": [
+        { "key": "RealTimeIsUniversal", "type": "bool", "label": "Set Real Time (BIOS time) to Universal", "default": false }
+      ]
+    }
+  ]
+}
+
