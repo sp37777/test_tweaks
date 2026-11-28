@@ -268,9 +268,15 @@ try {
 
     Add-Type -AssemblyName System.Windows.Forms
     Add-Type -AssemblyName System.Drawing
-    [System.Windows.Forms.Application]::EnableVisualStyles()
-    [System.Windows.Forms.Application]::SetUnhandledExceptionMode([System.Windows.Forms.UnhandledExceptionMode]::CatchException)
-    [System.Windows.Forms.Application]::add_ThreadException({ param($s, $e) Write-Log "UI exception: $($e.Exception.Message)" })
+    try { [System.Windows.Forms.Application]::EnableVisualStyles() } catch { }
+    # The exception mode can only be changed before the first control is created on the thread.
+    # When the script is started a second time from the same PowerShell window or ISE, that call
+    # throws. The handler is just a safety net, so a failure here must never abort the script.
+    try {
+        [System.Windows.Forms.Application]::SetUnhandledExceptionMode([System.Windows.Forms.UnhandledExceptionMode]::CatchException)
+        [System.Windows.Forms.Application]::add_ThreadException({ param($s, $e) Write-Log "UI exception: $($e.Exception.Message)" })
+    }
+    catch { Write-Log 'UI exception handler not installed (PowerShell session was reused)' }
 
     # --- WINDOW ---
     $form = New-Object System.Windows.Forms.Form

@@ -1,0 +1,37 @@
+{
+  "metadata" : {
+    "lastSaved" : "2026-11-28 06:34:35"
+  },
+  "settings" : {
+    "UserName" : "User",
+    "PreventUpdateReboot" : false,
+    "DisableWpbt" : true,
+    "PreventDeviceApps" : true,
+    "DisableCoInstallers" : true,
+    "PreventDeviceEncryption" : false,
+    "DisableIndexing" : false,
+    "BestPerformanceVisuals" : false,
+    "DisableTransparency" : false
+  },
+  "remove" : [
+    "camera",
+    "clock",
+    "handwriting",
+    "maps",
+    "math-input",
+    "movies-tv",
+    "onedrive",
+    "onenote",
+    "outlook-new",
+    "powershell-ise",
+    "quick-assist",
+    "remote-desktop",
+    "speech",
+    "sticky-notes",
+    "todo",
+    "voice-recorder",
+    "media-player-modern",
+    "xbox",
+    "phone-link"
+  ]
+}

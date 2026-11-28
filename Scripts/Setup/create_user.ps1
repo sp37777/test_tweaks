@@ -1,21 +1,28 @@
-# 1. Parse the INI using Multiline Regex
-$iniPath = "C:\Windows\Setup\Scripts\user_choices.ini"
-$targetUser = "User2"
+# 1. Read UserName from user_choices.json (copied here by specialize_custom.ps1).
+# ConvertFrom-Json is used only on PowerShell 3+: Windows 7 ships PowerShell 2.0 without it.
+$choicesPath = "C:\Windows\Setup\Scripts\user_choices.json"
+$defaultUser = "User"
+$targetUser = $defaultUser
 
-if (Test-Path $iniPath) {
-    if ($PSVersionTable.PSVersion.Major -ge 3) {
-        $IniRaw = Get-Content $iniPath -Raw
-    } else {
-        $IniRaw = [System.IO.File]::ReadAllText($iniPath)
+if (Test-Path $choicesPath) {
+    try {
+        $raw = [System.IO.File]::ReadAllText($choicesPath)
+        $name = $null
+        if ($PSVersionTable.PSVersion.Major -ge 3) {
+            $parsed = $raw | ConvertFrom-Json
+            if ($parsed.settings -and $parsed.settings.UserName) { $name = [string]$parsed.settings.UserName }
+        } elseif ($raw -match '(?i)"UserName"\s*:\s*"((?:[^"\\]|\\.)*)"') {
+            $name = [regex]::Unescape($matches[1])
+        }
+        if ($name) { $name = $name.Trim() }
+        if ($name) {
+            $targetUser = $name
+        } else {
+            Write-Warning "UserName is empty or missing in $choicesPath. Using the default '$defaultUser'."
+        }
+    } catch {
+        Write-Warning "Could not read $choicesPath ($($_.Exception.Message)). Using the default '$defaultUser'."
     }
-    if ($IniRaw -match '(?m)^\s*Username\s*=\s*(.*)') {
-        $targetUser = $matches[1].Trim()
-    }
-}
-
-if (-not $targetUser) {
-    Write-Error "Could not parse Username from $iniPath."
-    exit 1
 }
 
 # 2. Check for existence (Using WMI for language independence)

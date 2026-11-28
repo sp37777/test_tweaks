@@ -252,18 +252,16 @@ function Finalize-TweakEnvironment {
     }
 }
 
+# Reads the "settings" of user_choices.json (copied by specialize_custom.ps1 from the flash drive).
+# A key counts as enabled only when it is a JSON true; a key that is absent counts as off.
+# No choices file at all (the chooser was closed without saving) means "defaults": apply the tweak.
+# A regex instead of ConvertFrom-Json, because Windows 7 ships PowerShell 2.0 (no ConvertFrom-Json).
 function Should-Apply($key) {
-    $iniPath = "C:\Windows\Setup\Scripts\user_choices.ini"
-    if (Test-Path $iniPath) {
-        # Read the file and look for the specific key=1 pattern
-        # This bypasses the need for ConvertFrom-StringData and handles sections safely
-        $match = Get-Content $iniPath | Where-Object { $_ -match "^\s*$key\s*=\s*1" }
-        if ($null -ne $match) {
-            return $true
-        }
-    } else {
-        # If no INI exists, default to applying the tweak
-        return $true
+    $jsonPath = "C:\Windows\Setup\Scripts\user_choices.json"
+    if (Test-Path $jsonPath) {
+        $raw = [System.IO.File]::ReadAllText($jsonPath)
+        return ($raw -match ('(?i)"' + [regex]::Escape($key) + '"\s*:\s*true'))
     }
+    # If no choices file exists, default to applying the tweak
     return $false
 }

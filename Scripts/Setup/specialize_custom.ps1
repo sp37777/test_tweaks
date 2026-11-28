@@ -49,14 +49,16 @@ if (-not (Test-Path $src)) {
     exit
 }
 
-# Define ini target path
+# Define choices target path
 $TargetPath = "C:\Windows\Setup\Scripts"
 if (!(Test-Path $TargetPath)) { New-Item -ItemType Directory -Path $TargetPath -Force }
-$iniName = "user_choices.ini";
-$SourceFile = Join-Path $src $iniName
+$choicesName = "user_choices.json";
+$SourceFile = Join-Path $src $choicesName
 if (Test-Path $SourceFile) {
-    Copy-Item -Path $SourceFile -Destination (Join-Path $TargetPath $iniName) -Force
-    Clear-Content -Path $SourceFile -Force
+    Copy-Item -Path $SourceFile -Destination (Join-Path $TargetPath $choicesName) -Force
+    # One-shot: the flash copy is removed so it can never leak into the next installation
+    Remove-Item -Path $SourceFile -Force -ErrorAction SilentlyContinue
+    if (Test-Path $SourceFile) { Clear-Content -Path $SourceFile -Force }
 }
 
 # --- Version Specific Tweaks ---
@@ -114,24 +116,46 @@ try {
         }
     }
     
-    $tweakerPath = Join-Path $PSScriptRoot 'tweaker.ps1'
-
-    $arguments = '-NoProfile -ExecutionPolicy Bypass -File "{0}"' -f $tweakerPath
-
-    $process = Start-Process `
-        -FilePath "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" `
-        -ArgumentList $arguments `
-        -Wait `
-        -PassThru
-
-    if ($process.ExitCode -ne 0) {
-        throw "Tweaker failed with exit code $($process.ExitCode)"
-    }
 }
 finally {
     # 4. Clean up - This block runs regardless of success or failure above
     Dismount-DefaultHive
 	$Global:IsBulkTweak = $false
+}
+
+# --- Settings and component removal ---
+# Separate processes on purpose: an exit, a crash or a hung window in them cannot abort this script.
+# The default user hive is dismounted at this point; the child scripts load and unload it themselves.
+function Invoke-ChildScript {
+    param([string]$ScriptPath, [string[]]$ScriptArgs)
+    if (-not (Test-Path $ScriptPath)) { Write-Warning "Not found: $ScriptPath"; return }
+    $argList = '-NoProfile -ExecutionPolicy Bypass -File "{0}"' -f $ScriptPath
+    foreach ($a in $ScriptArgs) { $argList += ' ' + $a }
+    try {
+        $p = Start-Process -FilePath "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" `
+            -ArgumentList $argList -Wait -PassThru
+        if ($p.ExitCode -ne 0) { Write-Warning "$ScriptPath exited with code $($p.ExitCode)" }
+    } catch {
+        Write-Warning "Could not run $ScriptPath : $($_.Exception.Message)"
+    }
+}
+
+$choicesFile = Join-Path $TargetPath "user_choices.json"
+
+if ($osVersion -ge 8.1) {
+    Write-Host "Applying settings" -ForegroundColor Cyan
+    # -SkipUserCreation: the account is created by create_user.ps1 below (works on Windows 7 too)
+    Invoke-ChildScript (Join-Path $PSScriptRoot 'apply_settings.ps1') @(
+        ('-ChoicesPath "{0}"' -f $choicesFile),
+        '-SkipUserCreation'
+    )
+}
+if ($osVersion -ge 10) {
+    Write-Host "Removing components" -ForegroundColor Cyan
+    Invoke-ChildScript (Join-Path $PSScriptRoot 'removal_gui.ps1') @(
+        ('-ChoicesPath "{0}"' -f $choicesFile),
+        ('-CatalogPath "{0}"' -f (Join-Path $src 'removables.json'))
+    )
 }
 
 # Apply the drive label
